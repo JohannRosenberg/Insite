@@ -4,44 +4,45 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import io.github.johannrosenberg.insite.da.Repository
+import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
+import io.github.johannrosenberg.insite.ui.screens.main.MainHandler
 import io.github.johannrosenberg.insite.ui.theme.InsiteTheme
+import io.github.johannrosenberg.jetmagic.composables.crm
+import io.github.johannrosenberg.jetmagic.navigation.navman
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            InsiteTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+        navman.activity = this
+
+        Repository.loadAppData {
+            if (navman.totalScreensDisplayed == 0) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    navman.goto(composableResId = ComposableResourceIDs.HOME_SCREEN)
                 }
             }
         }
+
+        enableEdgeToEdge()
+        setContent {
+            InsiteTheme {
+                MainHandler()
+            }
+        }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun onBackPressed() {
+        if (!navman.goBack())
+            super.onBackPressed()
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    InsiteTheme {
-        Greeting("Android")
+    override fun onDestroy() {
+        crm.onConfigurationChanged()
+        super.onDestroy()
     }
 }

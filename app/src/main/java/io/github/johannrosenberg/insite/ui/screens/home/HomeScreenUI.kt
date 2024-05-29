@@ -2,17 +2,15 @@ package io.github.johannrosenberg.insite.ui.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -20,11 +18,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import io.github.johannrosenberg.insite.App
+import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
-import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_BOTTOM
-import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_END
-import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_TOP
+import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
+import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
 import io.github.johannrosenberg.insite.ui.screens.main.MainViewModel
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -66,25 +67,27 @@ fun HomeScreen(
             TopAppBar(
                 modifier = Modifier
                     .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT)
-                    .padding(
+
+/*                    .padding(
                         top = APPBAR_PADDING_TOP,
                         end = APPBAR_PADDING_END,
                         bottom = APPBAR_PADDING_BOTTOM
-                    ),
+                    )*/,
                 title = {
                     Row(
                         modifier = Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        //Text(text = motionConfig.name, fontSize = APPBAR_FONT_SIZE)
+                        Text(text = App.context.getString( R.string.all_categoies), fontSize = APPBAR_FONT_SIZE)
                     }
                 },
                 navigationIcon = {
-                    Row(Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT), verticalAlignment = Alignment.CenterVertically) {
                         IconButton(onClick = onToolbarMenuClick) {
                             Icon(
+                                modifier = Modifier.size(APPBAR_ICON_SIZE),
                                 tint = MaterialTheme.colorScheme.primary,
-                                imageVector = Icons.Filled.Menu,
+                                imageVector = ImageVector.vectorResource(R.drawable.menu),
                                 contentDescription = ""
                             )
                         }

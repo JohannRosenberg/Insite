@@ -4,7 +4,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object ScreenGlobals {
-    val DEFAULT_APPBAR_HEIGHT = 68.dp
+    val APPBAR_ICON_SIZE = 30.dp
+    val DEFAULT_APPBAR_HEIGHT = 80.dp
     val BACK_BUTTON_ICON_SIZE = 22.dp
     val LIST_ITEM_ICON_SIZE = 40.dp
     val NAVIGATION_MENU_ICON_SIZE = 25.dp

@@ -45,13 +45,18 @@ fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
 
     NavDrawer(
         //currentMenuId.value,
-       //Repository.appData.motionConfigs,
+        //Repository.appData.motionConfigs,
         currentMenuId = vm.currentMenuId.value,
         scrollState,
         onNavItemClick = { menuId, saveSelectedMenuItem, composableResId, screenData ->
             coroutineScope.launch {
                 drawerState.close()
-                vm.onNavItemClick(menuId = menuId, saveMenuId = saveSelectedMenuItem, composableResId = composableResId, p = screenData)
+                vm.onNavItemClick(
+                    menuId = menuId,
+                    saveMenuId = saveSelectedMenuItem,
+                    composableResId = composableResId,
+                    p = screenData
+                )
             }
         },
         modifier = modifier
@@ -82,8 +87,10 @@ fun NavDrawer(
                 modifier = Modifier.padding(top = 10.dp),
                 headlineContent = {
                     Text(
-                        App.context.getString(R.string.app_name), color = MaterialColors.red300, fontSize = 20.sp, fontWeight = FontWeight
-                            .Bold
+                        App.context.getString(R.string.app_name),
+                        color = MaterialColors.red300,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 leadingContent = {
@@ -101,19 +108,19 @@ fun NavDrawer(
 
             Divider(modifier = Modifier.padding(vertical = 10.dp))
 
-/*            motionConfigs.forEach {
-                if (it.fullScreenMode || (!it.fullScreenMode && servoControllerIsAvailable)) {
-                    NavMenuItem(
-                        id = it.id,
-                        icon = Icons.Filled.TurnSharpRight,
-                        label = it.name,
-                        selected = currentMenuId == it.id,
-                        saveSelectedMenuItem = true,
-                        composableResId = ComposableResourceIDs.HOME,
-                        onNavItemClick = onNavItemClick
-                    )
-                }
-            }*/
+            /*            motionConfigs.forEach {
+                            if (it.fullScreenMode || (!it.fullScreenMode && servoControllerIsAvailable)) {
+                                NavMenuItem(
+                                    id = it.id,
+                                    icon = Icons.Filled.TurnSharpRight,
+                                    label = it.name,
+                                    selected = currentMenuId == it.id,
+                                    saveSelectedMenuItem = true,
+                                    composableResId = ComposableResourceIDs.HOME,
+                                    onNavItemClick = onNavItemClick
+                                )
+                            }
+                        }*/
 
 
         }
