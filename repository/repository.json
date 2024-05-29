@@ -1,0 +1,161 @@
+{
+  "iconsPath": "https://raw.githubusercontent.com/JohannRosenberg/Insite/main/app/src/main/res/drawable/",
+  "categories": [
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "categories": [
+        {
+          "id": "automotive-ev-problem",
+          "name": "EV Problem"
+        },
+        {
+          "id": "automotive-purchasing-ev",
+          "name": "Purchasing EV"
+        }
+      ]
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "categories": [
+        {
+          "id": "business-advertising",
+          "name": "Advertising"
+        },
+        {
+          "id": "business-management",
+          "name": "Management"
+        }
+      ]
+    },
+    {
+      "id": "crime",
+      "name": "Crime",
+      "categories": [
+        {
+          "id": "crime-financial",
+          "name": "Financial"
+        },
+        {
+          "id": "crime-theft",
+          "name": "Theft"
+        },
+        {
+          "id": "crime-violent",
+          "name": "Violent"
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "categories": [
+        {
+          "id": "education-college",
+          "name": "College"
+        },
+        {
+          "id": "education-high-school",
+          "name": "High School"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "categories": [
+        {
+          "id": "health-first-aid",
+          "name": "First Aid"
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "name": "home",
+      "categories": [
+        {
+          "id": "home-buying-a-house",
+          "name": "Buying a House"
+        },
+        {
+          "id": "home-home-improvement",
+          "name": "Home Improvement"
+        },
+        {
+          "id": "home-renting-an-apartment",
+          "name": "Renting an Apartment"
+        }
+      ]
+    },
+    {
+      "id": "relationships",
+      "name": "Relationships",
+      "categories": [
+        {
+          "id": "relationships-dating",
+          "name": "Dating"
+        },
+        {
+          "id": "relationships-friends",
+          "name": "Friends"
+        },
+        {
+          "id": "relationships-marriage",
+          "name": "Marriage"
+        }
+      ]
+    },
+    {
+      "id": "restaurant",
+      "name": "Restaurant",
+      "categories": [
+        {
+          "id": "restaurant-cooking",
+          "name": "Cooking"
+        },
+        {
+          "id": "restaurant-managing",
+          "name": "Managing"
+        },
+        {
+          "id": "restaurant-serving",
+          "name": "Serving"
+        }
+      ]
+    },
+    {
+      "id": "software-development",
+      "name": "Software Development",
+      "categories": [
+        {
+          "id": "softwaredevelopment-android",
+          "name": "Android"
+        },
+        {
+          "id": "software-development-gcp",
+          "name": "Google Cloud Platform"
+        },
+        {
+          "id": "software-development-ios",
+          "name": "iOS"
+        }
+      ]
+    },
+    {
+      "id": "travel",
+      "name": "Travel",
+      "categories": [
+        {
+          "id": "travel-camping",
+          "name": "Camping"
+        },
+        {
+          "id": "travel-international",
+          "name": "International"
+        }
+      ]
+    }
+  ]
+}
