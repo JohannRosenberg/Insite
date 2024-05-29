@@ -108,19 +108,19 @@
       ]
     },
     {
-      "id": "restaurant",
-      "name": "Restaurant",
+      "id": "restaurants",
+      "name": "Restaurants",
       "categories": [
         {
-          "id": "restaurant-cooking",
+          "id": "restaurants-cooking",
           "name": "Cooking"
         },
         {
-          "id": "restaurant-managing",
+          "id": "restaurants-managing",
           "name": "Managing"
         },
         {
-          "id": "restaurant-serving",
+          "id": "restaurants-serving",
           "name": "Serving"
         }
       ]
