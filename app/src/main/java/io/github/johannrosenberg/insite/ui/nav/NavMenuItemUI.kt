@@ -1,6 +1,7 @@
 package io.github.johannrosenberg.insite.ui.nav
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationDrawerItem
@@ -33,6 +34,7 @@ fun NavMenuItem(
         selected = selected,
         icon = {
             AsyncImage(
+                modifier = Modifier.size(30.dp),
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(iconPath)
                     .decoderFactory(SvgDecoder.Factory())
