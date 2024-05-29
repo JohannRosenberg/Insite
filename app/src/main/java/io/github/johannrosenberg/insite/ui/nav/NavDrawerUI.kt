@@ -116,7 +116,7 @@ fun NavDrawer(
             quizPostings.categories.forEach {
                 NavMenuItem(
                     id = it.id,
-                    iconPath = quizPostings.iconsPath + it.name,
+                    iconPath = quizPostings.iconsPath + it.name + ".svg",
                     label = it.name,
                     selected = currentMenuId == it.id,
                     saveSelectedMenuItem = true,
