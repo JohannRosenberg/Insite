@@ -2,8 +2,11 @@ package io.github.johannrosenberg.insite.da
 
 import android.content.Context
 import android.content.SharedPreferences
+import earth.topdog.android.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.App
+import io.github.johannrosenberg.insite.da.web.WebAPI
 import io.github.johannrosenberg.insite.models.AppData
+import io.github.johannrosenberg.insite.models.QuizPostings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +21,11 @@ class Repository {
         lateinit var appData: AppData
 
         private const val KEY_APP_DATA = "appData"
+        private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
+
+        suspend fun getQuizPostings(): QuizPostings {
+            return webApi.getQuizPostings()
+        }
 
         fun loadAppData(onLoaded: () -> Unit) {
             CoroutineScope(Dispatchers.IO).launch {

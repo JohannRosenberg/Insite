@@ -67,4 +67,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.org.jetbrains.kotlinx.serializaiton)
     implementation(libs.jetmagic)
+    implementation(libs.com.squareup.retrofit2)
+    implementation(libs.com.squareup.retrofit2.adapter.rxjava2)
+    implementation(libs.com.squareup.retrofit2.converter.moshi)
+    implementation(libs.com.squareup.retrofit2.converter.gson)
+    implementation(libs.com.squareup.retrofit2.converter.scalars)
+
 }
