@@ -1,25 +1,25 @@
 package io.github.johannrosenberg.insite.ui.nav
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
+import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import io.github.johannrosenberg.insite.ui.theme.AppColors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavMenuItem(
     id: String,
-    icon: ImageVector,
+    iconPath: String,
     label: String,
     selected: Boolean = false,
     saveSelectedMenuItem: Boolean = false,
@@ -32,12 +32,20 @@ fun NavMenuItem(
         label = { Text(label) },
         selected = selected,
         icon = {
-            Icon(
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(iconPath)
+                    .decoderFactory(SvgDecoder.Factory())
+                    .build(),
+                contentDescription = null,
+            )
+
+/*            Icon(
                 modifier = Modifier.size(ScreenGlobals.NAVIGATION_MENU_ICON_SIZE),
                 imageVector = icon,
                 contentDescription = "",
                 tint = AppColors.navigationIconTint
-            )
+            )*/
         },
         colors = NavigationDrawerItemDefaults.colors(
             unselectedContainerColor = AppColors.navigationItemUnselectedContainerColor,

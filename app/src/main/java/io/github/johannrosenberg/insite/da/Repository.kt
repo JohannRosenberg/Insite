@@ -2,6 +2,7 @@ package io.github.johannrosenberg.insite.da
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.compose.runtime.mutableStateOf
 import earth.topdog.android.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.da.web.WebAPI
@@ -18,17 +19,17 @@ import kotlinx.serialization.json.Json
  */
 class Repository {
     companion object {
-        lateinit var appData: AppData
+        var appData = AppData()
+
+        var quizPostings = mutableStateOf(QuizPostings())
 
         private const val KEY_APP_DATA = "appData"
         private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
 
-        suspend fun getQuizPostings(): QuizPostings {
-            return webApi.getQuizPostings()
-        }
-
         fun loadAppData(onLoaded: () -> Unit) {
             CoroutineScope(Dispatchers.IO).launch {
+                quizPostings.value = webApi.getQuizPostings()
+
                 val sharedPrefs = App.context.currentActivity?.getPreferences(Context.MODE_PRIVATE)
                 var appDataLoaded = false
 
@@ -43,7 +44,6 @@ class Repository {
 
                 if (!appDataLoaded) {
                     appData = AppData()
-
                 }
 
                 onLoaded()

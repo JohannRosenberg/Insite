@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
+import io.github.johannrosenberg.insite.da.Repository
+import io.github.johannrosenberg.insite.models.QuizPostings
+import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import kotlinx.coroutines.launch
 
@@ -44,6 +47,7 @@ fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
 
     NavDrawer(
+        quizPostings = Repository.quizPostings.value,
         //currentMenuId.value,
         //Repository.appData.motionConfigs,
         currentMenuId = vm.currentMenuId.value,
@@ -67,6 +71,7 @@ fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavDrawer(
+    quizPostings: QuizPostings,
     //motionConfigs: List<MotionConfig>,
     currentMenuId: String,
     navDrawerScrollState: ScrollState,
@@ -107,6 +112,18 @@ fun NavDrawer(
             )
 
             Divider(modifier = Modifier.padding(vertical = 10.dp))
+
+            quizPostings.categories.forEach {
+                NavMenuItem(
+                    id = it.id,
+                    iconPath = quizPostings.iconsPath + it.name,
+                    label = it.name,
+                    selected = currentMenuId == it.id,
+                    saveSelectedMenuItem = true,
+                    composableResId = ComposableResourceIDs.HOME,
+                    onNavItemClick = onNavItemClick
+                )
+            }
 
             /*            motionConfigs.forEach {
                             if (it.fullScreenMode || (!it.fullScreenMode && servoControllerIsAvailable)) {

@@ -72,5 +72,9 @@ dependencies {
     implementation(libs.com.squareup.retrofit2.converter.moshi)
     implementation(libs.com.squareup.retrofit2.converter.gson)
     implementation(libs.com.squareup.retrofit2.converter.scalars)
+    //implementation(libs.io.coil.kt)
+    implementation(libs.io.coil.compose)
+    implementation(libs.io.coil.svg)
+
 
 }
