@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +26,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
+import io.github.johannrosenberg.insite.da.Repository
+import io.github.johannrosenberg.insite.models.Post
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
@@ -45,21 +50,23 @@ fun HomeHandler(composableInstance: ComposableInstance) {
         vm.imageManager.onComposableInstanceTerminated(composableInstance = composableInstance)
         composableInstance.onUpdate?.observeAsState()?.value
 
-        //val motionConfig = Repository.getCurrentMotionConfig()
+        val quizPostings = Repository.quizPostings.value
 
         HomeScreen(
+            posts = quizPostings.posts,
             onToolbarMenuClick = {
                 coroutineScope.launch {
                     vmMain.drawerState.open()
                 }
             },
-)
+        )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    posts: List<Post>,
     onToolbarMenuClick: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -68,21 +75,27 @@ fun HomeScreen(
                 modifier = Modifier
                     .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT)
 
-/*                    .padding(
-                        top = APPBAR_PADDING_TOP,
-                        end = APPBAR_PADDING_END,
-                        bottom = APPBAR_PADDING_BOTTOM
-                    )*/,
+                /*                    .padding(
+                                        top = APPBAR_PADDING_TOP,
+                                        end = APPBAR_PADDING_END,
+                                        bottom = APPBAR_PADDING_BOTTOM
+                                    )*/,
                 title = {
                     Row(
                         modifier = Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = App.context.getString( R.string.all_categoies), fontSize = APPBAR_FONT_SIZE)
+                        Text(
+                            text = App.context.getString(R.string.all_categoies),
+                            fontSize = APPBAR_FONT_SIZE
+                        )
                     }
                 },
                 navigationIcon = {
-                    Row(Modifier.height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT), verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        Modifier.height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         IconButton(onClick = onToolbarMenuClick) {
                             Icon(
                                 modifier = Modifier.size(APPBAR_ICON_SIZE),
@@ -94,6 +107,22 @@ fun HomeScreen(
                     }
                 }
             )
+
+            LazyColumn {
+                items(posts) { post ->
+                    Column {
+                        Row {
+                            Text(text = post.title)
+                        }
+                        Row {
+                            Text(text = post.date)
+                            Text(text = post.category)
+                            Text(text = post.author)
+                        }
+                        HorizontalDivider()
+                    }
+                }
+            }
         }
     }
 }

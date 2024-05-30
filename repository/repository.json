@@ -227,6 +227,286 @@
       "date": "2024-03-25",
       "category": "automotive|ev-problem",
       "author": "Br0wn"
+    },
+    {
+      "id": "k4te",
+      "title": "Battery Keeps Dying",
+      "date": "2024-07-15",
+      "category": "automotive|ev-problem",
+      "author": "R3dF1re"
+    },
+    {
+      "id": "qx7lwr",
+      "title": "Engine Overheating",
+      "date": "2024-11-02",
+      "category": "automotive|ev-problem",
+      "author": "Blu3Sky"
+    },
+    {
+      "id": "y6stg",
+      "title": "Brakes Squeaking",
+      "date": "2024-04-20",
+      "category": "automotive|ev-problem",
+      "author": "Green1"
+    },
+    {
+      "id": "r2lwd",
+      "title": "Transmission Slipping",
+      "date": "2024-09-28",
+      "category": "automotive|ev-problem",
+      "author": "Yell0w"
+    },
+    {
+      "id": "9x5g",
+      "title": "Car Pulling to One Side",
+      "date": "2024-05-03",
+      "category": "automotive|ev-problem",
+      "author": "Purpl3"
+    },
+    {
+      "id": "d3mfw",
+      "title": "Engine Misfiring",
+      "date": "2024-02-18",
+      "category": "automotive|ev-problem",
+      "author": "Orang3"
+    },
+    {
+      "id": "g7trw",
+      "title": "Headlights Not Working",
+      "date": "2024-10-11",
+      "category": "automotive|ev-problem",
+      "author": "Bl4ck"
+    },
+    {
+      "id": "m2g6",
+      "title": "Unusual Exhaust Smoke",
+      "date": "2024-08-07",
+      "category": "automotive|ev-problem",
+      "author": "Whit3"
+    },
+    {
+      "id": "q9flm",
+      "title": "Car Vibrating While Driving",
+      "date": "2024-12-30",
+      "category": "automotive|ev-problem",
+      "author": "Gray12"
+    },
+    {
+      "id": "p4tr9",
+      "title": "Air Conditioner Not Cooling",
+      "date": "2024-03-25",
+      "category": "automotive|ev-problem",
+      "author": "Br0wn"
+    },
+    {
+      "id": "k4te",
+      "title": "Battery Keeps Dying",
+      "date": "2024-07-15",
+      "category": "automotive|ev-problem",
+      "author": "R3dF1re"
+    },
+    {
+      "id": "qx7lwr",
+      "title": "Engine Overheating",
+      "date": "2024-11-02",
+      "category": "automotive|ev-problem",
+      "author": "Blu3Sky"
+    },
+    {
+      "id": "y6stg",
+      "title": "Brakes Squeaking",
+      "date": "2024-04-20",
+      "category": "automotive|ev-problem",
+      "author": "Green1"
+    },
+    {
+      "id": "r2lwd",
+      "title": "Transmission Slipping",
+      "date": "2024-09-28",
+      "category": "automotive|ev-problem",
+      "author": "Yell0w"
+    },
+    {
+      "id": "9x5g",
+      "title": "Car Pulling to One Side",
+      "date": "2024-05-03",
+      "category": "automotive|ev-problem",
+      "author": "Purpl3"
+    },
+    {
+      "id": "d3mfw",
+      "title": "Engine Misfiring",
+      "date": "2024-02-18",
+      "category": "automotive|ev-problem",
+      "author": "Orang3"
+    },
+    {
+      "id": "g7trw",
+      "title": "Headlights Not Working",
+      "date": "2024-10-11",
+      "category": "automotive|ev-problem",
+      "author": "Bl4ck"
+    },
+    {
+      "id": "m2g6",
+      "title": "Unusual Exhaust Smoke",
+      "date": "2024-08-07",
+      "category": "automotive|ev-problem",
+      "author": "Whit3"
+    },
+    {
+      "id": "q9flm",
+      "title": "Car Vibrating While Driving",
+      "date": "2024-12-30",
+      "category": "automotive|ev-problem",
+      "author": "Gray12"
+    },
+    {
+      "id": "p4tr9",
+      "title": "Air Conditioner Not Cooling",
+      "date": "2024-03-25",
+      "category": "automotive|ev-problem",
+      "author": "Br0wn"
+    },
+    {
+      "id": "k4te",
+      "title": "Battery Keeps Dying",
+      "date": "2024-07-15",
+      "category": "automotive|ev-problem",
+      "author": "R3dF1re"
+    },
+    {
+      "id": "qx7lwr",
+      "title": "Engine Overheating",
+      "date": "2024-11-02",
+      "category": "automotive|ev-problem",
+      "author": "Blu3Sky"
+    },
+    {
+      "id": "y6stg",
+      "title": "Brakes Squeaking",
+      "date": "2024-04-20",
+      "category": "automotive|ev-problem",
+      "author": "Green1"
+    },
+    {
+      "id": "r2lwd",
+      "title": "Transmission Slipping",
+      "date": "2024-09-28",
+      "category": "automotive|ev-problem",
+      "author": "Yell0w"
+    },
+    {
+      "id": "9x5g",
+      "title": "Car Pulling to One Side",
+      "date": "2024-05-03",
+      "category": "automotive|ev-problem",
+      "author": "Purpl3"
+    },
+    {
+      "id": "d3mfw",
+      "title": "Engine Misfiring",
+      "date": "2024-02-18",
+      "category": "automotive|ev-problem",
+      "author": "Orang3"
+    },
+    {
+      "id": "g7trw",
+      "title": "Headlights Not Working",
+      "date": "2024-10-11",
+      "category": "automotive|ev-problem",
+      "author": "Bl4ck"
+    },
+    {
+      "id": "m2g6",
+      "title": "Unusual Exhaust Smoke",
+      "date": "2024-08-07",
+      "category": "automotive|ev-problem",
+      "author": "Whit3"
+    },
+    {
+      "id": "q9flm",
+      "title": "Car Vibrating While Driving",
+      "date": "2024-12-30",
+      "category": "automotive|ev-problem",
+      "author": "Gray12"
+    },
+    {
+      "id": "p4tr9",
+      "title": "Air Conditioner Not Cooling",
+      "date": "2024-03-25",
+      "category": "automotive|ev-problem",
+      "author": "Br0wn"
+    },
+    {
+      "id": "k4te",
+      "title": "Battery Keeps Dying",
+      "date": "2024-07-15",
+      "category": "automotive|ev-problem",
+      "author": "R3dF1re"
+    },
+    {
+      "id": "qx7lwr",
+      "title": "Engine Overheating",
+      "date": "2024-11-02",
+      "category": "automotive|ev-problem",
+      "author": "Blu3Sky"
+    },
+    {
+      "id": "y6stg",
+      "title": "Brakes Squeaking",
+      "date": "2024-04-20",
+      "category": "automotive|ev-problem",
+      "author": "Green1"
+    },
+    {
+      "id": "r2lwd",
+      "title": "Transmission Slipping",
+      "date": "2024-09-28",
+      "category": "automotive|ev-problem",
+      "author": "Yell0w"
+    },
+    {
+      "id": "9x5g",
+      "title": "Car Pulling to One Side",
+      "date": "2024-05-03",
+      "category": "automotive|ev-problem",
+      "author": "Purpl3"
+    },
+    {
+      "id": "d3mfw",
+      "title": "Engine Misfiring",
+      "date": "2024-02-18",
+      "category": "automotive|ev-problem",
+      "author": "Orang3"
+    },
+    {
+      "id": "g7trw",
+      "title": "Headlights Not Working",
+      "date": "2024-10-11",
+      "category": "automotive|ev-problem",
+      "author": "Bl4ck"
+    },
+    {
+      "id": "m2g6",
+      "title": "Unusual Exhaust Smoke",
+      "date": "2024-08-07",
+      "category": "automotive|ev-problem",
+      "author": "Whit3"
+    },
+    {
+      "id": "q9flm",
+      "title": "Car Vibrating While Driving",
+      "date": "2024-12-30",
+      "category": "automotive|ev-problem",
+      "author": "Gray12"
+    },
+    {
+      "id": "p4tr9",
+      "title": "Air Conditioner Not Cooling",
+      "date": "2024-03-25",
+      "category": "automotive|ev-problem",
+      "author": "Br0wn"
     }
   ]
 }
