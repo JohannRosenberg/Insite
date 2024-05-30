@@ -94,7 +94,7 @@ fun NavDrawer(
                 headlineContent = {
                     Text(
                         App.context.getString(R.string.app_name),
-                        color = MaterialColors.red300,
+                        color = MaterialColors.yellow900,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -108,7 +108,7 @@ fun NavDrawer(
                         contentDescription = ""
                     )
                 },
-                supportingContent = { Text(App.context.getString(R.string.for_critical_thinkers)) },
+                supportingContent = { Text(App.context.getString(R.string.challenges_for_critical_thinkers)) },
                 colors = ListItemDefaults.colors(containerColor = MaterialColors.white)
             )
 
