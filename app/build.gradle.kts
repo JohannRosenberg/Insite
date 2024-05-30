@@ -75,6 +75,6 @@ dependencies {
     //implementation(libs.io.coil.kt)
     implementation(libs.io.coil.compose)
     implementation(libs.io.coil.svg)
-
+    implementation(libs.com.github.jeziellago)
 
 }

@@ -4,6 +4,8 @@ import io.github.johannrosenberg.insite.models.QuizPostings
 import retrofit2.http.GET
 
 const val APIBaseAddress = "https://raw.githubusercontent.com/JohannRosenberg/Insite/main/repository/"
+const val NavMenuIconsPath = APIBaseAddress + "NavMenuIcons/"
+const val PostsPath = APIBaseAddress + "Posts/"
 
 /**
  * Retrofit API declarations.
