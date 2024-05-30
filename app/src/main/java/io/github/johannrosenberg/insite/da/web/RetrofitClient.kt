@@ -42,6 +42,7 @@ class RetrofitClient {
 
                 requestBuilder.header("Accept", "application/json")
                 requestBuilder.header("Content-Type", "application/json")
+                requestBuilder.header("Cache-control", "no-cache")
 
                 requestHeaders.forEach { entry ->
                     requestBuilder.header(entry.key, entry.value)

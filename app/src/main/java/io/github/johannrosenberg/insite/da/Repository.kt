@@ -21,14 +21,29 @@ class Repository {
     companion object {
         var appData = AppData()
 
-        var quizPostings = mutableStateOf(QuizPostings())
+        private var postings = QuizPostings()
+        var quizPostings = mutableStateOf(postings)
+        val categories = mutableMapOf<String, String>()
 
         private const val KEY_APP_DATA = "appData"
         private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
 
         fun loadAppData(onLoaded: () -> Unit) {
             CoroutineScope(Dispatchers.IO).launch {
-                quizPostings.value = webApi.getQuizPostings()
+                postings = webApi.getQuizPostings()
+
+                // Store the categories in a separate map. This allows for
+                // a fast lookup instead of having to search through nested
+                // lists to find a category name given its id.
+
+                postings.categories.forEach { category ->
+                    categories[category.id] = category.name
+                    category.categories?.forEach { subCategory ->
+                        categories[subCategory.id] = subCategory.name
+                    }
+                }
+
+                quizPostings.value = postings
 
                 val sharedPrefs = App.context.currentActivity?.getPreferences(Context.MODE_PRIVATE)
                 var appDataLoaded = false
@@ -61,6 +76,10 @@ class Repository {
                     apply()
                 }
             }
+        }
+
+        fun getCategoryNameById(id: String): String {
+            return categories[id] ?: ""
         }
     }
 }
