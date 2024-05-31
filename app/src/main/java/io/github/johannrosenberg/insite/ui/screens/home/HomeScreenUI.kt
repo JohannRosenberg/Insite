@@ -2,6 +2,7 @@ package io.github.johannrosenberg.insite.ui.screens.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,10 +10,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -23,12 +27,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -49,22 +57,15 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeHandler(composableInstance: ComposableInstance) {
 
-    val parentComposableInstance = LocalComposableInstance.current
-
     CompositionLocalProvider(LocalComposableInstance provides composableInstance) {
 
         val coroutineScope = rememberCoroutineScope()
-
         val vmMain: MainViewModel = viewModel()
-        val vm = composableInstance.viewmodel as HomeViewModel
-        vm.imageManager.onComposableInstanceTerminated(composableInstance = composableInstance)
-        composableInstance.onUpdate?.observeAsState()?.value
-
 
         HomeScreen(
             quizPostings = Repository.quizPostings.value,
-            categoryId = Repository.selectedNavMenuId.value,
-            showFilterButton = Repository.appData.selectedNavMenuId != NAV_MENU_ID_SHOW_ALL_POSTS,
+            categoryId = Repository.selectedCategoryId.value,
+            showFilterButton = Repository.isASubCategoryOrHasSubCategories(Repository.selectedCategoryId.value),
             onNavMenuButtonClick = {
                 coroutineScope.launch {
                     vmMain.drawerState.open()
@@ -74,6 +75,9 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 
             },
             onFilterPostsClick = {
+
+            },
+            onFilterBySubCategoryClick = { categoryId ->
 
             }
         )
@@ -88,26 +92,28 @@ fun HomeScreen(
     showFilterButton: Boolean,
     onNavMenuButtonClick: () -> Unit,
     onPostClick: (postId: String) -> Unit,
-    onFilterPostsClick: () -> Unit
+    onFilterPostsClick: () -> Unit,
+    onFilterBySubCategoryClick: (categoryId: String) -> Unit
 ) {
+    var showFilterMenu by remember { mutableStateOf(false) }
+
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             TopAppBar(
                 modifier = Modifier
-                    .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT)
-
-                /*                    .padding(
-                                        top = APPBAR_PADDING_TOP,
-                                        end = APPBAR_PADDING_END,
-                                        bottom = APPBAR_PADDING_BOTTOM
-                                    )*/,
+                    .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
                 title = {
                     Row(
                         modifier = Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        val title =
+                            if (categoryId == NAV_MENU_ID_SHOW_ALL_POSTS)
+                                App.context.getString(R.string.all_categoies)
+                            else Repository.getCategoryNameById(categoryId)
+
                         Text(
-                            text = App.context.getString(R.string.all_categoies),
+                            text = title,
                             fontSize = APPBAR_FONT_SIZE
                         )
                     }
@@ -128,20 +134,52 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    if (showFilterButton) {
-                        IconButton(onClick = onFilterPostsClick) {
-                            Icon(
-                                modifier = Modifier.size(APPBAR_ICON_SIZE),
-                                tint = MaterialTheme.colorScheme.primary,
-                                imageVector = Icons.Filled.FilterList,
-                                contentDescription = ""
-                            )
+                    Row(
+                        Modifier.height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (showFilterButton) {
+                            Box(
+                                modifier = Modifier
+                                    .wrapContentSize(Alignment.TopStart)
+                            ) {
+                                IconButton(onClick = {
+                                    showFilterMenu = true
+                                }) {
+                                    Icon(
+                                        modifier = Modifier.size(APPBAR_ICON_SIZE),
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        imageVector = Icons.Filled.FilterList,
+                                        contentDescription = ""
+                                    )
+                                }
+
+                                DropdownMenu(
+                                    expanded = showFilterMenu,
+                                    onDismissRequest = { showFilterMenu = false }
+                                ) {
+                                    val subCategories =
+                                        Repository.getSubCategories(parentCategoryId = categoryId)
+
+                                    subCategories?.forEach { subCategory ->
+                                        DropdownMenuItem(
+                                            text = { Text(subCategory.name) },
+                                            onClick = {
+                                                onFilterBySubCategoryClick(subCategory.id)
+                                            },
+                                        )
+                                    }
+
+                                }
+                            }
                         }
                     }
                 }
             )
 
             LazyColumn {
+                var showFirstDivider = true
+
                 itemsIndexed(quizPostings.posts) { index, post ->
                     var showPost = true
 
@@ -150,8 +188,10 @@ fun HomeScreen(
                     }
 
                     if (showPost) {
-                        if (index == 0)
+                        if (showFirstDivider) {
                             HorizontalDivider()
+                            showFirstDivider = false
+                        }
 
                         Column(modifier = Modifier
                             .fillMaxWidth()
@@ -161,7 +201,11 @@ fun HomeScreen(
                             .padding(10.dp)
                         ) {
                             Row(modifier = Modifier.padding(bottom = 10.dp)) {
-                                Text(text = post.title, color = MaterialColors.deepOrangeA700)
+                                Text(
+                                    text = post.title,
+                                    color = MaterialColors.red700,
+                                    fontWeight = FontWeight.Bold
+                                )
                             }
                             Row(
                                 modifier = Modifier.fillMaxWidth(),

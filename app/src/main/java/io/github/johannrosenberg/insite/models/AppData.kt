@@ -14,5 +14,6 @@ class AppData {
     val version: Int = 1
 
     var selectedNavMenuId: String = NAV_MENU_ID_SHOW_ALL_POSTS
+    var selectedCategoryId: String = ""
 
 }
