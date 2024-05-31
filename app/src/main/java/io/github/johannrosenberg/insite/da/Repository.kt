@@ -24,9 +24,16 @@ class Repository {
         private var postings = QuizPostings()
         var quizPostings = mutableStateOf(postings)
         val categories = mutableMapOf<String, String>()
+        val selectedNavMenuId = mutableStateOf(appData.selectedNavMenuId)
 
         private const val KEY_APP_DATA = "appData"
         private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
+
+        fun saveSelectedNavMenuItemId(id: String) {
+            appData.selectedNavMenuId = id
+            saveAppData()
+            selectedNavMenuId.value = id
+        }
 
         fun loadAppData(onLoaded: () -> Unit) {
             CoroutineScope(Dispatchers.IO).launch {

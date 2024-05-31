@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +32,7 @@ import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
 import io.github.johannrosenberg.insite.da.web.NavMenuIconsPath
 import io.github.johannrosenberg.insite.models.QuizPostings
+import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import kotlinx.coroutines.launch
@@ -51,7 +52,7 @@ fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
         quizPostings = Repository.quizPostings.value,
         //currentMenuId.value,
         //Repository.appData.motionConfigs,
-        currentMenuId = vm.currentMenuId.value,
+        currentMenuId = Repository.selectedNavMenuId.value,
         scrollState,
         onNavItemClick = { menuId, saveSelectedMenuItem, composableResId, screenData ->
             coroutineScope.launch {
@@ -112,7 +113,16 @@ fun NavDrawer(
                 colors = ListItemDefaults.colors(containerColor = MaterialColors.white)
             )
 
-            Divider(modifier = Modifier.padding(vertical = 10.dp))
+            HorizontalDivider()
+            NavMenuItem(
+                id = NAV_MENU_ID_SHOW_ALL_POSTS,
+                label = App.context.getString(R.string.show_all_posts),
+                selected = currentMenuId == NAV_MENU_ID_SHOW_ALL_POSTS,
+                saveSelectedMenuItem = true,
+                composableResId = ComposableResourceIDs.HOME,
+                onNavItemClick = onNavItemClick
+            )
+            HorizontalDivider()
 
             quizPostings.categories.forEach {
                 NavMenuItem(

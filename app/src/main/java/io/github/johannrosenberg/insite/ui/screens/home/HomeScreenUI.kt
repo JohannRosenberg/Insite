@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -34,6 +36,7 @@ import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
 import io.github.johannrosenberg.insite.models.QuizPostings
+import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
@@ -60,12 +63,16 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 
         HomeScreen(
             quizPostings = Repository.quizPostings.value,
-            onToolbarMenuClick = {
+            showFilterButton = Repository.appData.selectedNavMenuId != NAV_MENU_ID_SHOW_ALL_POSTS,
+            onNavMenuButtonClick = {
                 coroutineScope.launch {
                     vmMain.drawerState.open()
                 }
             },
             onPostClick = { id ->
+
+            },
+            onFilterPostsClick = {
 
             }
         )
@@ -76,8 +83,10 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 @Composable
 fun HomeScreen(
     quizPostings: QuizPostings,
-    onToolbarMenuClick: () -> Unit,
-    onPostClick: (postId: String) -> Unit
+    showFilterButton: Boolean,
+    onNavMenuButtonClick: () -> Unit,
+    onPostClick: (postId: String) -> Unit,
+    onFilterPostsClick: () -> Unit
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -106,11 +115,23 @@ fun HomeScreen(
                         Modifier.height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        IconButton(onClick = onToolbarMenuClick) {
+                        IconButton(onClick = onNavMenuButtonClick) {
                             Icon(
                                 modifier = Modifier.size(APPBAR_ICON_SIZE),
                                 tint = MaterialTheme.colorScheme.primary,
                                 imageVector = ImageVector.vectorResource(R.drawable.menu),
+                                contentDescription = ""
+                            )
+                        }
+                    }
+                },
+                actions = {
+                    if (showFilterButton) {
+                        IconButton(onClick = onFilterPostsClick) {
+                            Icon(
+                                modifier = Modifier.size(APPBAR_ICON_SIZE),
+                                tint = MaterialTheme.colorScheme.primary,
+                                imageVector = Icons.Filled.FilterList,
                                 contentDescription = ""
                             )
                         }

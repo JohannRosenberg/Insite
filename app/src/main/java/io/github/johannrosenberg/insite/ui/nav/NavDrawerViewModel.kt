@@ -20,6 +20,8 @@ class NavDrawerViewModel : ViewModel() {
     }
 
     fun onNavItemClick(menuId: String, saveMenuId: Boolean, composableResId: String, p: Any? = null) {
+        Repository.saveSelectedNavMenuItemId(menuId)
+
         /*if (saveMenuId)
             currentMenuId.value = menuId
 
