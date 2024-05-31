@@ -88,5 +88,11 @@ class Repository {
         fun getCategoryNameById(id: String): String {
             return categories[id] ?: ""
         }
+
+        fun postBelongsToCategory(postCategoryId: String, categoryId: String): Boolean {
+            val postCategories = postCategoryId.split("|")
+            return postCategories[0] == categoryId
+
+        }
     }
 }

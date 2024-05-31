@@ -63,6 +63,7 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 
         HomeScreen(
             quizPostings = Repository.quizPostings.value,
+            categoryId = Repository.selectedNavMenuId.value,
             showFilterButton = Repository.appData.selectedNavMenuId != NAV_MENU_ID_SHOW_ALL_POSTS,
             onNavMenuButtonClick = {
                 coroutineScope.launch {
@@ -83,6 +84,7 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 @Composable
 fun HomeScreen(
     quizPostings: QuizPostings,
+    categoryId: String,
     showFilterButton: Boolean,
     onNavMenuButtonClick: () -> Unit,
     onPostClick: (postId: String) -> Unit,
@@ -141,33 +143,41 @@ fun HomeScreen(
 
             LazyColumn {
                 itemsIndexed(quizPostings.posts) { index, post ->
-                    if (index == 0)
-                        HorizontalDivider()
+                    var showPost = true
 
-                    Column(modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onPostClick(post.id)
-                        }
-                        .padding(10.dp)
-                    ) {
-                        Row(modifier = Modifier.padding(bottom = 10.dp)) {
-                            Text(text = post.title, color = MaterialColors.deepOrangeA700)
-                        }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(text = post.date, fontSize = 12.sp)
-                            Text(
-                                text = Repository.getCategoryNameById(post.category),
-                                fontSize = 12.sp
-                            )
-                            Text(text = post.author, fontSize = 12.sp)
-                        }
+                    if (showFilterButton) {
+                        showPost = (Repository.postBelongsToCategory(post.category, categoryId))
                     }
 
-                    HorizontalDivider()
+                    if (showPost) {
+                        if (index == 0)
+                            HorizontalDivider()
+
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onPostClick(post.id)
+                            }
+                            .padding(10.dp)
+                        ) {
+                            Row(modifier = Modifier.padding(bottom = 10.dp)) {
+                                Text(text = post.title, color = MaterialColors.deepOrangeA700)
+                            }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(text = post.date, fontSize = 12.sp)
+                                Text(
+                                    text = Repository.getCategoryNameById(post.category),
+                                    fontSize = 12.sp
+                                )
+                                Text(text = post.author, fontSize = 12.sp)
+                            }
+                        }
+
+                        HorizontalDivider()
+                    }
                 }
             }
         }
