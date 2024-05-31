@@ -78,7 +78,7 @@ fun HomeHandler(composableInstance: ComposableInstance) {
 
             },
             onFilterBySubCategoryClick = { categoryId ->
-
+                Repository.saveSelectedCategoryId(categoryId)
             }
         )
     }
@@ -158,13 +158,21 @@ fun HomeScreen(
                                     expanded = showFilterMenu,
                                     onDismissRequest = { showFilterMenu = false }
                                 ) {
-                                    val subCategories =
-                                        Repository.getSubCategories(parentCategoryId = categoryId)
+                                    val subCategories = Repository.getSubCategories(categoryId = categoryId)
+
+                                    DropdownMenuItem(
+                                        text = { Text(App.context.getString(R.string.show_all_posts)) },
+                                        onClick = {
+                                            showFilterMenu = false
+                                            onFilterBySubCategoryClick("")
+                                        },
+                                    )
 
                                     subCategories?.forEach { subCategory ->
                                         DropdownMenuItem(
                                             text = { Text(subCategory.name) },
                                             onClick = {
+                                                showFilterMenu = false
                                                 onFilterBySubCategoryClick(subCategory.id)
                                             },
                                         )

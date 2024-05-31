@@ -41,8 +41,16 @@ class Repository {
         }
 
         fun saveSelectedCategoryId(categoryId: String) {
-            appData.selectedCategoryId = categoryId
-            selectedCategoryId.value = categoryId
+            var categoryIdToSave = categoryId
+
+            if (categoryId.isEmpty()) {
+                val categories = selectedCategoryId.value.split("|")
+                categoryIdToSave = categories[0]
+            }
+
+            appData.selectedCategoryId = categoryIdToSave
+            saveAppData()
+            selectedCategoryId.value = categoryIdToSave
         }
 
         fun isASubCategoryOrHasSubCategories(categoryId: String): Boolean {
@@ -50,7 +58,7 @@ class Repository {
                 return true
             }
 
-            return postings.categories.firstOrNull {it.id == categoryId}?.categories != null
+            return postings.categories.firstOrNull { it.id == categoryId }?.categories != null
         }
 
         fun loadAppData(onLoaded: () -> Unit) {
@@ -120,8 +128,14 @@ class Repository {
 
         }
 
-        fun getSubCategories(parentCategoryId: String): List<Category>? {
-            return postings.categories.find { it.id == parentCategoryId }?.categories
+        fun getSubCategories(categoryId: String): List<Category>? {
+            var catId = categoryId
+
+            if (categoryId.contains("|")) {
+                val categories = categoryId.split("|")
+                catId = categories[0]
+            }
+            return postings.categories.find { it.id == catId }?.categories
         }
     }
 }
