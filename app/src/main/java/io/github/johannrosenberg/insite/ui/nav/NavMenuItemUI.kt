@@ -6,11 +6,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterListOff
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -49,13 +51,16 @@ fun NavMenuItem(
                         .data(iconPath)
                         .decoderFactory(SvgDecoder.Factory())
                         .build(),
-                    contentDescription = null,
+                    contentDescription = null, colorFilter = ColorFilter.tint(color = AppColors.navigationIconTint)
                 )
             }
         },
         colors = NavigationDrawerItemDefaults.colors(
-            unselectedContainerColor = AppColors.navigationItemUnselectedContainerColor,
-            selectedContainerColor = AppColors.navigationItemSelectedContainerColor
+            unselectedContainerColor = MaterialTheme.colorScheme.surfaceTint,
+            selectedContainerColor = AppColors.navigationItemSelectedContainerColor,
+            selectedTextColor = AppColors.navigationItemSelectedTextColor,
+            //selectedIconColor = AppColors.navigationItemSelectedIconColor,
+            //unselectedIconColor = AppColors.navigationItemUnselectedIconColor
         ),
         shape = RoundedCornerShape(0.dp, 25.dp, 25.dp, 0.dp),
         onClick = {

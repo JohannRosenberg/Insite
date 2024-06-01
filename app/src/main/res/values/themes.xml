@@ -3,5 +3,6 @@
 
     <style name="Theme.Insite" parent="android:Theme.Material.Light.NoActionBar" >
         <item name="android:windowBackground">#000000</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

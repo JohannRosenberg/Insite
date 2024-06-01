@@ -78,30 +78,30 @@ fun NavDrawer(
     ) {
         Column(
             modifier = modifier
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.surfaceTint)
                 .wrapContentWidth()
                 .fillMaxHeight()
                 .verticalScroll(navDrawerScrollState)
         ) {
             ListItem(
-                modifier = Modifier.padding(top = 10.dp),
+                modifier = Modifier.padding(top = 20.dp, bottom = 20.dp),
                 headlineContent = {
                     Text(
                         App.context.getString(R.string.app_name),
-                        color = MaterialColors.yellow900,
+                        color = MaterialColors.cyan300,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
                 },
                 leadingContent = {
                     Image(
-                        modifier = Modifier.size(40.dp),
-                        painter = painterResource(id = R.drawable.thinking_emoji),
+                        modifier = Modifier.size(70.dp),
+                        painter = painterResource(id = R.drawable.app_icon),
                         contentDescription = ""
                     )
                 },
                 supportingContent = { Text(App.context.getString(R.string.challenges_for_critical_thinkers)) },
-                colors = ListItemDefaults.colors(containerColor = MaterialColors.white)
+                colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceTint)
             )
 
             HorizontalDivider()

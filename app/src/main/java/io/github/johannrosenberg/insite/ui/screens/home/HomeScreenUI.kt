@@ -1,5 +1,6 @@
 package io.github.johannrosenberg.insite.ui.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,6 +50,7 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
 import io.github.johannrosenberg.insite.ui.screens.main.MainViewModel
+import io.github.johannrosenberg.insite.ui.theme.AppColors
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -122,7 +124,7 @@ fun HomeScreen(
                         IconButton(onClick = onNavMenuButtonClick) {
                             Icon(
                                 modifier = Modifier.size(APPBAR_ICON_SIZE),
-                                tint = MaterialTheme.colorScheme.primary,
+                                tint = MaterialColors.white,
                                 imageVector = ImageVector.vectorResource(R.drawable.menu),
                                 contentDescription = ""
                             )
@@ -144,13 +146,14 @@ fun HomeScreen(
                                 }) {
                                     Icon(
                                         modifier = Modifier.size(APPBAR_ICON_SIZE),
-                                        tint = MaterialTheme.colorScheme.primary,
+                                        tint = AppColors.toolbarIcon,
                                         imageVector = Icons.Filled.FilterList,
                                         contentDescription = ""
                                     )
                                 }
 
                                 DropdownMenu(
+                                    modifier = Modifier.background(MaterialTheme.colorScheme.secondaryContainer),
                                     expanded = showFilterMenu,
                                     onDismissRequest = { showFilterMenu = false }
                                 ) {
@@ -207,8 +210,8 @@ fun HomeScreen(
                             Row(modifier = Modifier.padding(bottom = 10.dp)) {
                                 Text(
                                     text = post.title,
-                                    color = MaterialColors.red700,
-                                    fontWeight = FontWeight.Bold
+                                    color = MaterialColors.blueGray300,
+                                    fontWeight = FontWeight.SemiBold
                                 )
                             }
                             Row(

@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
 
         //enableEdgeToEdge()
         setContent {
-            InsiteTheme {
+            InsiteTheme(darkTheme = true) {
                 if (Repository.showSplashScreen.value) {
                     Image(
                         modifier = Modifier.fillMaxSize(),

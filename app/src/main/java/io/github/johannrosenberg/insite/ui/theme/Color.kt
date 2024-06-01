@@ -14,47 +14,112 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-class AppColors {
-    companion object {
-        private var useLightTheme = true
+object AppColors {
+    var useLightTheme = true
 
-        val snackbarNormalBg = if (useLightTheme) Color(0xDC146CD6) else MaterialColors.blue700
-        val snackbarNormalText = if (useLightTheme) Color.White else Color.White
-        val snackbarCriticalBg = if (useLightTheme) Color(0xFFE41717) else Color(0xFFFF4B4B)
-        val snackbarCriticalText = if (useLightTheme) Color.White else Color.White
-        val snackbarNormalAction = if (useLightTheme) Color.White else Color.White
-        val snackbarCriticalAction = if (useLightTheme) Color(0xFFFFCBCB) else Color.White
+    val toolbarIcon: Color
+        get() {
+            return MaterialColors.cyan300
+        }
 
-        // Navigation menu
-        val navigationIconTint = if (useLightTheme) MaterialColors.gray600 else MaterialColors.gray100
-        val navigationItemUnselectedContainerColor = if (useLightTheme) Color.White  else Color.Black
-        val navigationItemSelectedContainerColor = MaterialColors.lightBlue100
 
-        // Tint for icons.
-        val tintForIconsWithBackgroundColor = MaterialColors.white
-        val tintForIconsWithNoBackgroundColor = if (useLightTheme) MaterialColors.gray600 else MaterialColors.gray100
+    val snackbarNormalBg: Color
+        get() {
+            return if (useLightTheme) Color(0xDC146CD6) else MaterialColors.blue700
+        }
 
-        val defaultButtonColors = ButtonColors(
-            containerColor = MaterialColors.lightBlue500,
-            contentColor = MaterialColors.white,
-            disabledContainerColor = MaterialColors.gray300,
-            disabledContentColor = MaterialColors.gray700
-        )
+    val snackbarNormalText: Color
+        get() {
+            return if (useLightTheme) Color.White else Color.White
+        }
 
-        val cancelButtonColors: ButtonColors = defaultButtonColors.copy(containerColor = MaterialColors.red400)
+    val snackbarCriticalBg: Color
+        get() {
+            return if (useLightTheme) Color(0xFFE41717) else Color(0xFFFF4B4B)
+        }
 
-        lateinit var defaultSwitchColors: SwitchColors
+    val snackbarCriticalText: Color
+        get() {
+            return if (useLightTheme) Color.White else Color.White
+        }
 
-        @Composable
-        fun InitializeComposableColors() {
-            defaultSwitchColors = SwitchDefaults.colors(
-                checkedThumbColor = MaterialColors.blue700,
-                checkedTrackColor = MaterialColors.blue100,
-                uncheckedThumbColor = MaterialColors.gray400,
-                uncheckedTrackColor= MaterialColors.gray100,
+    val snackbarNormalAction: Color
+        get() {
+            return if (useLightTheme) Color.White else Color.White
+        }
+
+    val snackbarCriticalAction: Color
+        get() {
+            return if (useLightTheme) Color(0xFFFFCBCB) else Color.White
+        }
+
+    // Navigation menu
+    val navigationIconTint: Color
+        get() {
+            return if (useLightTheme) MaterialColors.red500 else MaterialColors.blueGray400
+        }
+
+    val navigationItemUnselectedContainerColor: Color
+        get() {
+            return if (useLightTheme) Color.White else Color.Black
+        }
+
+    val navigationItemSelectedContainerColor: Color
+        get() {
+            return Color(0xCBD2E3EB)
+        }
+
+    val navigationItemSelectedTextColor: Color
+        get() {
+            return MaterialColors.blueGray900
+        }
+
+    val navigationItemSelectedIconColor: Color
+        get() {
+            return MaterialColors.green600
+        }
+
+    val navigationItemUnselectedIconColor: Color
+        get() {
+            return MaterialColors.yellow300
+        }
+
+    // Tint for icons.
+    val tintForIconsWithBackgroundColor: Color
+        get() {
+            return MaterialColors.white
+        }
+
+    val tintForIconsWithNoBackgroundColor: Color
+        get() {
+            return if (useLightTheme) MaterialColors.gray600 else MaterialColors.gray100
+        }
+
+    val defaultButtonColors: ButtonColors
+        get() {
+            return ButtonColors(
+                containerColor = MaterialColors.lightBlue500,
+                contentColor = MaterialColors.white,
+                disabledContainerColor = MaterialColors.gray300,
+                disabledContentColor = MaterialColors.gray700
             )
         }
 
+    val cancelButtonColors: ButtonColors
+        get() {
+            return defaultButtonColors.copy(containerColor = MaterialColors.red400)
+        }
+
+    lateinit var defaultSwitchColors: SwitchColors
+
+    @Composable
+    fun InitializeComposableColors() {
+        defaultSwitchColors = SwitchDefaults.colors(
+            checkedThumbColor = MaterialColors.blue700,
+            checkedTrackColor = MaterialColors.blue100,
+            uncheckedThumbColor = MaterialColors.gray400,
+            uncheckedTrackColor = MaterialColors.gray100,
+        )
     }
 }
 
@@ -155,6 +220,8 @@ class MaterialColors {
         val blueA200 = Color(0xFF448AFF)
         val blueA400 = Color(0xFF2979FF)
         val blueA700 = Color(0xFF2962FF)
+
+        val lightBlue123 = Color(0x75B3E5FC)
 
         // Light Blue
         val lightBlue50 = Color(0xFFE1F5FE)
