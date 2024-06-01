@@ -1,9 +1,9 @@
-package io.github.johannrosenberg.catlaser.utils
+package io.github.johannrosenberg.insite.utils
 
 import android.util.Log
 import io.github.johannrosenberg.insite.BuildConfig.DEBUG
 
-const val TAG = "LaserPointer"
+const val TAG = "Insite"
 
 fun logInfo(message: String) {
     if (DEBUG) {

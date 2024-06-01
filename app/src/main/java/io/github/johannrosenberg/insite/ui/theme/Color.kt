@@ -34,15 +34,6 @@ class AppColors {
         val tintForIconsWithBackgroundColor = MaterialColors.white
         val tintForIconsWithNoBackgroundColor = if (useLightTheme) MaterialColors.gray600 else MaterialColors.gray100
 
-        // Colors for icons under Settings
-        val settingsIconRoboticArmModel = if (useLightTheme) MaterialColors.blue500 else MaterialColors.blue100
-        val settingsIconRoboticArmBoundaries = if (useLightTheme) MaterialColors.orangeA400 else MaterialColors.orangeA100
-        val settingsIconLaserPointerImage = if (useLightTheme) MaterialColors.purple500 else MaterialColors.purple100
-        val settingsIconLaserPointerImageSize = if (useLightTheme) MaterialColors.red900 else MaterialColors.red100
-
-        // Animated motion on home screen
-        val motionBoundaryColor = if (useLightTheme) MaterialColors.gray700 else MaterialColors.gray100
-
         val defaultButtonColors = ButtonColors(
             containerColor = MaterialColors.lightBlue500,
             contentColor = MaterialColors.white,

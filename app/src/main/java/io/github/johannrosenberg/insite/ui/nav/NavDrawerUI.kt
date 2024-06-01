@@ -1,6 +1,5 @@
 package io.github.johannrosenberg.insite.ui.nav
 
-//import io.github.johannrosenberg.catlaser.da.Repository
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -38,20 +36,17 @@ import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
 
     val vm: NavDrawerViewModel = viewModel()
-    App.mainViewModel.onNavigationDrawerOpened.value
+    App.mainViewModel.onNavigationDrawerOpened.intValue
 
     val scrollState = vm.navDrawerScrollState
     val coroutineScope = rememberCoroutineScope()
 
     NavDrawer(
         quizPostings = Repository.quizPostings.value,
-        //currentMenuId.value,
-        //Repository.appData.motionConfigs,
         currentMenuId = Repository.selectedNavMenuId.value,
         scrollState,
         onNavItemClick = { menuId, saveSelectedMenuItem, composableResId, screenData ->
@@ -70,11 +65,9 @@ fun NavDrawerHandler(drawerState: DrawerState, modifier: Modifier = Modifier) {
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavDrawer(
     quizPostings: QuizPostings,
-    //motionConfigs: List<MotionConfig>,
     currentMenuId: String,
     navDrawerScrollState: ScrollState,
     onNavItemClick: (menuId: String, saveSelectedMenuItem: Boolean, composableResId: String, screenData: Any?) -> Unit,
@@ -102,9 +95,7 @@ fun NavDrawer(
                 },
                 leadingContent = {
                     Image(
-                        modifier = Modifier
-                            .size(40.dp),
-                        //.background(color = AppColors.settingsIconBackground, shape = CircleShape),
+                        modifier = Modifier.size(40.dp),
                         painter = painterResource(id = R.drawable.thinking_emoji),
                         contentDescription = ""
                     )
@@ -135,22 +126,6 @@ fun NavDrawer(
                     onNavItemClick = onNavItemClick
                 )
             }
-
-            /*            motionConfigs.forEach {
-                            if (it.fullScreenMode || (!it.fullScreenMode && servoControllerIsAvailable)) {
-                                NavMenuItem(
-                                    id = it.id,
-                                    icon = Icons.Filled.TurnSharpRight,
-                                    label = it.name,
-                                    selected = currentMenuId == it.id,
-                                    saveSelectedMenuItem = true,
-                                    composableResId = ComposableResourceIDs.HOME,
-                                    onNavItemClick = onNavItemClick
-                                )
-                            }
-                        }*/
-
-
         }
     }
 }

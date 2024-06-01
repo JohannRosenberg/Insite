@@ -74,9 +74,6 @@ fun HomeHandler(composableInstance: ComposableInstance) {
             onPostClick = { id ->
 
             },
-            onFilterPostsClick = {
-
-            },
             onFilterBySubCategoryClick = { categoryId ->
                 Repository.saveSelectedCategoryId(categoryId)
             }
@@ -92,7 +89,6 @@ fun HomeScreen(
     showFilterButton: Boolean,
     onNavMenuButtonClick: () -> Unit,
     onPostClick: (postId: String) -> Unit,
-    onFilterPostsClick: () -> Unit,
     onFilterBySubCategoryClick: (categoryId: String) -> Unit
 ) {
     var showFilterMenu by remember { mutableStateOf(false) }
@@ -188,7 +184,7 @@ fun HomeScreen(
             LazyColumn {
                 var showFirstDivider = true
 
-                itemsIndexed(quizPostings.posts) { index, post ->
+                itemsIndexed(quizPostings.posts) { _, post ->
                     var showPost = true
 
                     if (showFilterButton) {

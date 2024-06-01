@@ -3,8 +3,8 @@ package io.github.johannrosenberg.insite.da
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
-import earth.topdog.android.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.App
+import io.github.johannrosenberg.insite.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.da.web.WebAPI
 import io.github.johannrosenberg.insite.models.AppData
 import io.github.johannrosenberg.insite.models.Category
@@ -28,7 +28,6 @@ class Repository {
         val selectedNavMenuId = mutableStateOf(appData.selectedNavMenuId)
         val selectedCategoryId = mutableStateOf("")
 
-
         private const val KEY_APP_DATA = "appData"
         private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
 
@@ -38,27 +37,6 @@ class Repository {
             saveAppData()
             selectedNavMenuId.value = id
             selectedCategoryId.value = id
-        }
-
-        fun saveSelectedCategoryId(categoryId: String) {
-            var categoryIdToSave = categoryId
-
-            if (categoryId.isEmpty()) {
-                val categories = selectedCategoryId.value.split("|")
-                categoryIdToSave = categories[0]
-            }
-
-            appData.selectedCategoryId = categoryIdToSave
-            saveAppData()
-            selectedCategoryId.value = categoryIdToSave
-        }
-
-        fun isASubCategoryOrHasSubCategories(categoryId: String): Boolean {
-            if (categoryId.contains("|")) {
-                return true
-            }
-
-            return postings.categories.firstOrNull { it.id == categoryId }?.categories != null
         }
 
         fun loadAppData(onLoaded: () -> Unit) {
@@ -111,6 +89,27 @@ class Repository {
                     apply()
                 }
             }
+        }
+
+        fun saveSelectedCategoryId(categoryId: String) {
+            var categoryIdToSave = categoryId
+
+            if (categoryId.isEmpty()) {
+                val categories = selectedCategoryId.value.split("|")
+                categoryIdToSave = categories[0]
+            }
+
+            appData.selectedCategoryId = categoryIdToSave
+            saveAppData()
+            selectedCategoryId.value = categoryIdToSave
+        }
+
+        fun isASubCategoryOrHasSubCategories(categoryId: String): Boolean {
+            if (categoryId.contains("|")) {
+                return true
+            }
+
+            return postings.categories.firstOrNull { it.id == categoryId }?.categories != null
         }
 
         fun getCategoryNameById(id: String): String {

@@ -1,9 +1,7 @@
-package earth.topdog.android.da.web
+package io.github.johannrosenberg.insite.da.web
 
 import com.google.gson.GsonBuilder
 import io.github.johannrosenberg.insite.BuildConfig
-import io.github.johannrosenberg.insite.da.web.APIBaseAddress
-import io.github.johannrosenberg.insite.da.web.WebAPI
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Converter

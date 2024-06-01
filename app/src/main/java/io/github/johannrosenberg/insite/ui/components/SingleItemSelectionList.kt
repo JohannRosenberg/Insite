@@ -74,7 +74,7 @@ fun SingleItemSelectionList(
                         ) {
                             RadioButton(
                                 selected = item.id == selectedItem?.id,
-                                onClick = null // null recommended for accessibility with screenreaders
+                                onClick = null
                             )
                             Column {
                                 Text(

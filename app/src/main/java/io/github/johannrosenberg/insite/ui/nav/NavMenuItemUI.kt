@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterListOff
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
@@ -20,7 +19,6 @@ import coil.request.ImageRequest
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.theme.AppColors
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavMenuItem(
     id: String,
@@ -54,14 +52,6 @@ fun NavMenuItem(
                     contentDescription = null,
                 )
             }
-
-
-            /*            Icon(
-                            modifier = Modifier.size(ScreenGlobals.NAVIGATION_MENU_ICON_SIZE),
-                            imageVector = icon,
-                            contentDescription = "",
-                            tint = AppColors.navigationIconTint
-                        )*/
         },
         colors = NavigationDrawerItemDefaults.colors(
             unselectedContainerColor = AppColors.navigationItemUnselectedContainerColor,

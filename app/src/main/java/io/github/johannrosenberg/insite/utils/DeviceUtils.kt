@@ -1,4 +1,4 @@
-package io.github.johannrosenberg.catlaser.utils
+package io.github.johannrosenberg.insite.utils
 
 import android.content.res.Resources
 import android.util.DisplayMetrics

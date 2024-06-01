@@ -27,8 +27,6 @@ fun MainHandler(modifier: Modifier = Modifier) {
     App.mainViewModel = viewModel()
     val drawerState = App.mainViewModel.drawerState
 
-    //var drawerGesturesEnabled by remember { mutableStateOf(true) }
-
     navman.observeScreenChange {
         App.mainViewModel.drawerGesturesEnabled.value = (navman.totalScreensDisplayed == 1)
     }
