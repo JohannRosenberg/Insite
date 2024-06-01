@@ -31,14 +31,23 @@ fun MainHandler(modifier: Modifier = Modifier) {
         App.mainViewModel.drawerGesturesEnabled.value = (navman.totalScreensDisplayed == 1)
     }
 
-    Main(drawerState, drawerGesturesEnabled = App.mainViewModel.drawerGesturesEnabled.value, modifier = modifier)
+    Main(
+        modifier = modifier,
+        drawerState = drawerState,
+        drawerGesturesEnabled = App.mainViewModel.drawerGesturesEnabled.value
+    )
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Main(drawerState: DrawerState, drawerGesturesEnabled: Boolean, modifier: Modifier = Modifier) {
+fun Main(
+    modifier: Modifier = Modifier,
+    drawerState: DrawerState,
+    drawerGesturesEnabled: Boolean,
+) {
     Box {
+
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {

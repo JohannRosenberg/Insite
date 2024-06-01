@@ -11,6 +11,7 @@ import io.github.johannrosenberg.insite.models.Category
 import io.github.johannrosenberg.insite.models.QuizPostings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -27,6 +28,7 @@ class Repository {
         val categories = mutableMapOf<String, String>()
         val selectedNavMenuId = mutableStateOf(appData.selectedNavMenuId)
         val selectedCategoryId = mutableStateOf("")
+        val showSplashScreen = mutableStateOf(true)
 
         private const val KEY_APP_DATA = "appData"
         private var webApi: WebAPI = RetrofitClient.createRetrofitClient()
@@ -74,6 +76,8 @@ class Repository {
                     appData = AppData()
                 }
 
+                delay(3000)
+                showSplashScreen.value = false
                 onLoaded()
             }
         }
