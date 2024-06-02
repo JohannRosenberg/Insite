@@ -102,7 +102,7 @@ fun HomeScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()
             .paint(
-                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getCategoryNameById(categoryId).lowercase() + ".jpg"),
+                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getRootCategoryId(categoryId).lowercase() + ".jpg"),
                 contentScale = ContentScale.FillBounds,
                 alpha = 0.25f) ) {
             TopAppBar(
