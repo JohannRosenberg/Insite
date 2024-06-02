@@ -35,15 +35,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberAsyncImagePainter
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
+import io.github.johannrosenberg.insite.da.web.CategoryBackgroundImagePath
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
@@ -96,7 +100,12 @@ fun HomeScreen(
     var showFilterMenu by remember { mutableStateOf(false) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()
+            .paint(
+                // Replace with your image id
+                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getCategoryNameById(categoryId) + ".jpg"),
+                contentScale = ContentScale.FillBounds,
+                alpha = 0.4f) ) {
             TopAppBar(
                 modifier = Modifier
                     .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
@@ -196,7 +205,7 @@ fun HomeScreen(
 
                     if (showPost) {
                         if (showFirstDivider) {
-                            HorizontalDivider()
+                            HorizontalDivider(color = MaterialColors.teal50)
                             showFirstDivider = false
                         }
 
@@ -210,8 +219,8 @@ fun HomeScreen(
                             Row(modifier = Modifier.padding(bottom = 10.dp)) {
                                 Text(
                                     text = post.title,
-                                    color = MaterialColors.blueGray300,
-                                    fontWeight = FontWeight.SemiBold
+                                    color = MaterialColors.tealA100,
+                                    fontWeight = FontWeight.W300
                                 )
                             }
                             Row(
@@ -227,7 +236,7 @@ fun HomeScreen(
                             }
                         }
 
-                        HorizontalDivider()
+                        HorizontalDivider(color = MaterialColors.teal50)
                     }
                 }
             }

@@ -140,5 +140,10 @@ class Repository {
             }
             return postings.categories.find { it.id == catId }?.categories
         }
+
+        fun getRootCategoryId(categoryId: String): String {
+            val categories = categoryId.split("|")
+            return categories[0]
+        }
     }
 }
