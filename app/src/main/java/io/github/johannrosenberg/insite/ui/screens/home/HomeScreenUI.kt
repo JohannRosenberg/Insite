@@ -103,9 +103,9 @@ fun HomeScreen(
         Column(modifier = Modifier.fillMaxSize()
             .paint(
                 // Replace with your image id
-                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getCategoryNameById(categoryId) + ".jpg"),
+                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getCategoryNameById(categoryId).lowercase() + ".jpg"),
                 contentScale = ContentScale.FillBounds,
-                alpha = 0.4f) ) {
+                alpha = 0.25f) ) {
             TopAppBar(
                 modifier = Modifier
                     .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
