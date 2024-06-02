@@ -2,7 +2,10 @@
     <string name="all_categoies">All Categories</string>
     <string name="app_name">Insite</string>
     <string name="cancel">Cancel</string>
+    <string name="challenge">Challenge</string>
     <string name="challenges_for_critical_thinkers">Challenges for critical thinkers</string>
+    <string name="discussion">Discussion</string>
     <string name="okay">OK</string>
     <string name="show_all_posts">Show all posts</string>
+    <string name="solution">Solution</string>
 </resources>

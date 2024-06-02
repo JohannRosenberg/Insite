@@ -34,6 +34,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import io.github.johannrosenberg.insite.App
+import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.ui.components.BackButton
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
@@ -53,19 +55,19 @@ enum class PostTabs(
 ) {
     Challenge(
         id = "challenge",
-        label = "Challenge",
+        label = App.context.getString(R.string.challenge),
         selectedIcon = Icons.Filled.Quiz,
         unselectedIcon = Icons.Outlined.Quiz
     ),
     Solution(
         id = "solution",
-        label = "Solution",
+        label = App.context.getString(R.string.solution),
         selectedIcon = Icons.Filled.List,
         unselectedIcon = Icons.Outlined.List
     ),
     Discussion(
         id = "discussion",
-        label = "Discussion",
+        label = App.context.getString(R.string.discussion),
         selectedIcon = Icons.Filled.Chat,
         unselectedIcon = Icons.Outlined.Chat
     )
@@ -77,7 +79,9 @@ fun PostHandler(composableInstance: ComposableInstance) {
     CompositionLocalProvider(LocalComposableInstance provides composableInstance) {
 
         val vm = composableInstance.viewmodel as PostViewModel
-        val postId = composableInstance.parameters
+        val postId = composableInstance.parameters as String
+
+        vm.getPostDetails(postId)
 
         PostScreen(
             onBackButtonClick = {
@@ -92,7 +96,6 @@ fun PostHandler(composableInstance: ComposableInstance) {
 fun PostScreen(
     onBackButtonClick: () -> Unit,
 ) {
-    //var tabState by remember { mutableStateOf(0) }
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { PostTabs.entries.size })
     val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
@@ -124,11 +127,6 @@ fun PostScreen(
                     Text(text = PostTabs.entries[selectedTabIndex.value].label)
                 }
             }
-
-            /*            Column(modifier = Modifier.weight(1f)) {
-                            //Text(text = "Content goes here")
-
-                        }*/
 
             TabRow(selectedTabIndex = selectedTabIndex.value) {
                 PostTabs.entries.forEachIndexed { index, currentTab ->

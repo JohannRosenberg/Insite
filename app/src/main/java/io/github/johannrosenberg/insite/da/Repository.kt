@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
 import io.github.johannrosenberg.insite.App
+import io.github.johannrosenberg.insite.da.web.PostsPath
 import io.github.johannrosenberg.insite.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.da.web.WebAPI
 import io.github.johannrosenberg.insite.models.AppData
 import io.github.johannrosenberg.insite.models.Category
+import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.models.QuizPostings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -93,6 +95,19 @@ class Repository {
                     apply()
                 }
             }
+        }
+
+        suspend fun getPostDetails(postId: String): PostDetails {
+            val response = webApi.getPostDetails(PostsPath + postId + ".md")
+
+            val solutionPos = response.indexOf("### Solution:")
+            val discussionPos = response.indexOf("### ChatUrl:")
+
+            val challenge = response.substring(0, solutionPos).trim()
+            val solution = response.substring(solutionPos + 13, discussionPos).trim()
+            val discussionUrl = response.substring(discussionPos + 11).trim()
+
+            return PostDetails(challenge, solution, discussionUrl)
         }
 
         fun saveSelectedCategoryId(categoryId: String) {

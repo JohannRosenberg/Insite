@@ -2,6 +2,7 @@ package io.github.johannrosenberg.insite.da.web
 
 import io.github.johannrosenberg.insite.models.QuizPostings
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 const val APIBaseAddress = "https://raw.githubusercontent.com/JohannRosenberg/Insite/main/repository/"
 const val NavMenuIconsPath = APIBaseAddress + "NavMenuIcons/"
@@ -19,4 +20,7 @@ interface WebAPI {
      */
     @GET("repository.json")
     suspend fun getQuizPostings(): QuizPostings
+
+    @GET
+    suspend fun getPostDetails(@Url url: String): String
 }
