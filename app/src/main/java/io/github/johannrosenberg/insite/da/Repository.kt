@@ -105,7 +105,7 @@ class Repository {
 
             val challenge = response.substring(0, solutionPos).trim()
             val solution = response.substring(solutionPos + 13, discussionPos).trim()
-            val discussionUrl = response.substring(discussionPos + 11).trim()
+            val discussionUrl = response.substring(discussionPos + 12).trim()
 
             return PostDetails(challenge, solution, discussionUrl)
         }
