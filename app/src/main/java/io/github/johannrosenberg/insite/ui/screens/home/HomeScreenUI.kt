@@ -102,7 +102,6 @@ fun HomeScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()
             .paint(
-                // Replace with your image id
                 painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getCategoryNameById(categoryId).lowercase() + ".jpg"),
                 contentScale = ContentScale.FillBounds,
                 alpha = 0.25f) ) {
