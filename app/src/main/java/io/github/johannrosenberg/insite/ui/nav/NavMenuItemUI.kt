@@ -59,8 +59,6 @@ fun NavMenuItem(
             unselectedContainerColor = MaterialTheme.colorScheme.surfaceTint,
             selectedContainerColor = AppColors.navigationItemSelectedContainerColor,
             selectedTextColor = AppColors.navigationItemSelectedTextColor,
-            //selectedIconColor = AppColors.navigationItemSelectedIconColor,
-            //unselectedIconColor = AppColors.navigationItemUnselectedIconColor
         ),
         shape = RoundedCornerShape(0.dp, 25.dp, 25.dp, 0.dp),
         onClick = {

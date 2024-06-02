@@ -50,6 +50,7 @@ import io.github.johannrosenberg.insite.da.Repository
 import io.github.johannrosenberg.insite.da.web.CategoryBackgroundImagePath
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
+import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
@@ -58,6 +59,7 @@ import io.github.johannrosenberg.insite.ui.theme.AppColors
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
+import io.github.johannrosenberg.jetmagic.navigation.navman
 import kotlinx.coroutines.launch
 
 @Composable
@@ -78,7 +80,7 @@ fun HomeHandler(composableInstance: ComposableInstance) {
                 }
             },
             onPostClick = { id ->
-
+                navman.goto(composableResId = ComposableResourceIDs.POST_SCREEN, p = id)
             },
             onFilterBySubCategoryClick = { categoryId ->
                 Repository.saveSelectedCategoryId(categoryId)

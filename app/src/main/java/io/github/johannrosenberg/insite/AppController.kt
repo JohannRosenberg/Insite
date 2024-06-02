@@ -8,6 +8,9 @@ import io.github.johannrosenberg.insite.ui.screens.home.HomeHandler
 import io.github.johannrosenberg.insite.ui.screens.home.HomeScreenHandler
 import io.github.johannrosenberg.insite.ui.screens.home.HomeViewModel
 import io.github.johannrosenberg.insite.ui.screens.main.MainViewModel
+import io.github.johannrosenberg.insite.ui.screens.post.PostHandler
+import io.github.johannrosenberg.insite.ui.screens.post.PostScreenHandler
+import io.github.johannrosenberg.insite.ui.screens.post.PostViewModel
 import io.github.johannrosenberg.jetmagic.composables.crm
 import io.github.johannrosenberg.jetmagic.initializeJetmagic
 import io.github.johannrosenberg.jetmagic.models.ComposableResource
@@ -48,6 +51,12 @@ class App : Application() {
                         // Home screen.
                         HomeScreenHandler(composableInstance)
                     },
+                    ComposableResource(
+                        resourceId = ComposableResourceIDs.POST_SCREEN,
+                    ) { composableInstance ->
+                        // Post screen.
+                        PostScreenHandler(composableInstance)
+                    },
 
 
                     // ************** List all children resources. **************
@@ -57,6 +66,13 @@ class App : Application() {
                     ) { composableInstance ->
                         // Home default
                         HomeHandler(composableInstance)
+                    },
+                    ComposableResource(
+                        resourceId = ComposableResourceIDs.POST,
+                        viewmodelClass = PostViewModel::class.java
+                    ) { composableInstance ->
+                        // Post default
+                        PostHandler(composableInstance)
                     },
                 )
             )
