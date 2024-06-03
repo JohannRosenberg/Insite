@@ -3,6 +3,7 @@ package io.github.johannrosenberg.insite.ui.screens.post
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
@@ -103,17 +105,26 @@ fun PostHandler(composableInstance: ComposableInstance) {
 
         vm.getPostDetails(postId)
 
+        fun launchUrlInBrowser(url: String) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(App.context, intent, null)
+        }
+
         PostScreen(
             postDetails = vm.postDetails.value,
             onBackButtonClick = {
                 navman.goBack()
             },
-            onLaunchDiscussion = { discussionUrl ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(discussionUrl))
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(App.context, intent, null)
-
-            }
+            onLaunchDiscussion = { url ->
+                launchUrlInBrowser(url = url)
+            },
+            onAuthorLink1Click = { url ->
+                launchUrlInBrowser(url = url)
+            },
+            onAuthorLink2Click = { url ->
+                launchUrlInBrowser(url = url)
+            },
         )
     }
 }
@@ -123,7 +134,9 @@ fun PostHandler(composableInstance: ComposableInstance) {
 fun PostScreen(
     postDetails: PostDetails?,
     onBackButtonClick: () -> Unit,
-    onLaunchDiscussion: (discussionUrl: String) -> Unit
+    onLaunchDiscussion: (discussionUrl: String) -> Unit,
+    onAuthorLink1Click: (url: String) -> Unit,
+    onAuthorLink2Click: (url: String) -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { PostTabs.entries.size })
@@ -232,10 +245,37 @@ fun PostScreen(
                                 Text(
                                     text = postDetails?.author?.bio ?: "",
                                     fontSize = 14.sp,
-                                    modifier = Modifier.padding(bottom = 20.dp)
+                                    modifier = Modifier.padding(bottom = 30.dp)
                                 )
-                            }
 
+                                if (postDetails?.author?.url1 != null) {
+                                    Text(
+                                        text = postDetails?.author?.url1 ?: "",
+                                        color = MaterialColors.lightBlue300,
+                                        fontSize = 14.sp,
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .padding(bottom = 20.dp)
+                                            .clickable {
+                                                onAuthorLink1Click(postDetails.author.url1 ?: "")
+                                            }
+                                    )
+                                }
+
+                                if (postDetails?.author?.url2 != null) {
+                                    Text(
+                                        text = postDetails?.author?.url2 ?: "",
+                                        color = MaterialColors.lightBlue300,
+                                        fontSize = 14.sp,
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .padding(bottom = 30.dp)
+                                            .clickable {
+                                                onAuthorLink1Click(postDetails.author.url2 ?: "")
+                                            }
+                                    )
+                                }
+                            }
                         }
                     }
                 }
