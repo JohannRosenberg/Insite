@@ -122,7 +122,8 @@ fun HomeScreen(
 
                         Text(
                             text = title,
-                            fontSize = APPBAR_FONT_SIZE
+                            fontSize = APPBAR_FONT_SIZE,
+                            color = AppColors.toolbarTitle
                         )
                     }
                 },
@@ -134,7 +135,7 @@ fun HomeScreen(
                         IconButton(onClick = onNavMenuButtonClick) {
                             Icon(
                                 modifier = Modifier.size(APPBAR_ICON_SIZE),
-                                tint = MaterialColors.white,
+                                tint = AppColors.toolbarNavIcon,
                                 imageVector = ImageVector.vectorResource(R.drawable.menu),
                                 contentDescription = ""
                             )

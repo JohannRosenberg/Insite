@@ -5,10 +5,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
+import io.github.johannrosenberg.insite.ui.theme.AppColors
 
 @Composable
 fun BackButton(
@@ -18,7 +18,7 @@ fun BackButton(
         Icon(
             modifier = Modifier
                 .size(ScreenGlobals.BACK_BUTTON_ICON_SIZE ),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = AppColors.toolbarNavIcon,
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = ""
         )

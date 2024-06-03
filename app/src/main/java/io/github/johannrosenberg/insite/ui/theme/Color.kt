@@ -17,9 +17,29 @@ val Pink40 = Color(0xFF7D5260)
 object AppColors {
     var useLightTheme = true
 
+    val bottomTabIndicator: Color
+        get() {
+            return MaterialColors.lightBlue100
+        }
+
+    val bottomTabIconTextSelected: Color
+        get() {
+            return MaterialColors.blue100
+        }
+
+    val toolbarTitle: Color
+        get() {
+            return MaterialColors.white
+        }
+
     val toolbarIcon: Color
         get() {
             return MaterialColors.cyan300
+        }
+
+    val toolbarNavIcon: Color
+        get() {
+            return MaterialColors.white
         }
 
 

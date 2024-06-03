@@ -98,9 +98,12 @@ class Repository {
         }
 
         suspend fun getPostDetails(postId: String): PostDetails {
-            val postDetails = webApi.getPostDetails(PostsPath + postId + ".json")
-
-            return postDetails
+            try {
+                val postDetails = webApi.getPostDetails(PostsPath + postId + ".json")
+                return postDetails
+            } catch(ex: Exception) {
+                return PostDetails()
+            }
         }
 
         fun saveSelectedCategoryId(categoryId: String) {

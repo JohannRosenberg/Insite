@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -48,6 +50,7 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZ
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_BOTTOM
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_END
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_TOP
+import io.github.johannrosenberg.insite.ui.theme.AppColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
 import io.github.johannrosenberg.jetmagic.navigation.navman
@@ -118,7 +121,7 @@ fun PostScreen(
                     .padding(top = APPBAR_PADDING_TOP, end = APPBAR_PADDING_END, bottom = APPBAR_PADDING_BOTTOM),
                 title = {
                     Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
-                        Text("Some Post", fontSize = APPBAR_FONT_SIZE, color = MaterialTheme.colorScheme.primary)
+                        Text(App.context.getString(R.string.challenge), fontSize = APPBAR_FONT_SIZE, color = AppColors.toolbarTitle)
                     }
                 },
                 navigationIcon = {
@@ -136,7 +139,7 @@ fun PostScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(20.dp)
+                        .padding( start = 20.dp, end = 20.dp, bottom = 20.dp)
                 ) {
                     when (page) {
                         0 -> {
@@ -151,7 +154,7 @@ fun PostScreen(
                                     fontWeight = FontWeight.SemiBold,
                                     modifier = Modifier.padding(bottom = 20.dp)
                                 )
-                                Text(text = postDetails?.description ?: "", fontSize = 14.sp)
+                                Text(text = postDetails?.description?.replace("\\n","\n") ?: "", fontSize = 14.sp)
 
                             }
                         }
@@ -168,10 +171,18 @@ fun PostScreen(
                 }
             }
 
-            TabRow(selectedTabIndex = selectedTabIndex.value) {
+            TabRow(selectedTabIndex = selectedTabIndex.value,
+                indicator = { tabPositions ->
+                    if (selectedTabIndex.value < tabPositions.size) {
+                        TabRowDefaults.Indicator(
+                            modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex.value]),
+                            color = AppColors.bottomTabIndicator
+                        )
+                    }
+                }) {
                 PostTabs.entries.forEachIndexed { index, currentTab ->
                     Tab(selected = selectedTabIndex.value == index,
-                        selectedContentColor = MaterialTheme.colorScheme.primary,
+                        selectedContentColor = AppColors.bottomTabIconTextSelected,
                         unselectedContentColor = MaterialTheme.colorScheme.outline,
                         onClick = {
                             scope.launch {
