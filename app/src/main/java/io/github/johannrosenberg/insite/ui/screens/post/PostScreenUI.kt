@@ -34,8 +34,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
+import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
@@ -84,6 +86,7 @@ fun PostHandler(composableInstance: ComposableInstance) {
         vm.getPostDetails(postId)
 
         PostScreen(
+            postDetails = vm.postDetails.value,
             onBackButtonClick = {
                 navman.goBack()
             },
@@ -94,6 +97,7 @@ fun PostHandler(composableInstance: ComposableInstance) {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PostScreen(
+    postDetails: PostDetails?,
     onBackButtonClick: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
@@ -120,11 +124,25 @@ fun PostScreen(
                 }
             )
 
-            HorizontalPager(state = pagerState, modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = PostTabs.entries[selectedTabIndex.value].label)
+            HorizontalPager(
+                state = pagerState, modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {page ->
+                Box(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+                    when (page) {
+                        0 -> {
+                            //MarkdownText(markdown = postDetails?.challenge ?: "", modifier = Modifier.fillMaxSize())
+                            Text("Some very long text will be shown here. Today I watched a documentary on Jim Henson, the creeator the Muppets. I enjoyed this when I was a kid.")
+                        }
+                        1 -> {
+                            Text("Solution goes here")
+                        }
+                        2 -> {
+                            Text("Chat goes here")
+                        }
+                    }
+                    //Text(text = PostTabs.entries[selectedTabIndex.value].label)
                 }
             }
 
