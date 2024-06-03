@@ -28,7 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
-import io.github.johannrosenberg.insite.da.web.NavMenuIconsPath
+import io.github.johannrosenberg.insite.da.web.NAV_MENU_ICON_PATH
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
@@ -118,7 +118,7 @@ fun NavDrawer(
             quizPostings.categories.forEach {
                 NavMenuItem(
                     id = it.id,
-                    iconPath = NavMenuIconsPath + it.name.lowercase() + ".svg",
+                    iconPath = NAV_MENU_ICON_PATH + it.name.lowercase() + ".svg",
                     label = it.name,
                     selected = currentMenuId == it.id,
                     saveSelectedMenuItem = true,

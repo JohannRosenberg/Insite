@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
 import io.github.johannrosenberg.insite.App
-import io.github.johannrosenberg.insite.da.web.PostsPath
+import io.github.johannrosenberg.insite.da.web.POST_PATH
 import io.github.johannrosenberg.insite.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.da.web.WebAPI
 import io.github.johannrosenberg.insite.models.AppData
@@ -99,7 +99,7 @@ class Repository {
 
         suspend fun getPostDetails(postId: String): PostDetails {
             try {
-                val postDetails = webApi.getPostDetails(PostsPath + postId + ".json")
+                val postDetails = webApi.getPostDetails(POST_PATH + postId + ".json")
                 return postDetails
             } catch(ex: Exception) {
                 return PostDetails()

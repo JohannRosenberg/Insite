@@ -18,7 +18,7 @@ class RetrofitClient {
 
         fun createRetrofitClient(): WebAPI {
             return Retrofit.Builder()
-                .baseUrl(APIBaseAddress)
+                .baseUrl(API_BASE_ADDRESS)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))

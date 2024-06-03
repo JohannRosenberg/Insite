@@ -47,7 +47,7 @@ import coil.compose.rememberAsyncImagePainter
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
-import io.github.johannrosenberg.insite.da.web.CategoryBackgroundImagePath
+import io.github.johannrosenberg.insite.da.web.CATEGORY_BACKGROUND_IMAGE_PATH
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
@@ -104,7 +104,7 @@ fun HomeScreen(
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()
             .paint(
-                painter = rememberAsyncImagePainter(CategoryBackgroundImagePath + Repository.getRootCategoryId(categoryId).lowercase() + ".jpg"),
+                painter = rememberAsyncImagePainter(CATEGORY_BACKGROUND_IMAGE_PATH + Repository.getRootCategoryId(categoryId).lowercase() + ".jpg"),
                 contentScale = ContentScale.FillBounds,
                 alpha = 0.25f) ) {
             TopAppBar(

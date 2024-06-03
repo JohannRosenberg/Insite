@@ -44,12 +44,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import coil.compose.AsyncImage
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
+import io.github.johannrosenberg.insite.da.web.AUTHOR_PHOTO_PATH
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
@@ -207,7 +210,32 @@ fun PostScreen(
                         }
 
                         PostTabs.Author.ordinal -> {
-                            Text("Author goes here")
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                AsyncImage(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(bottom = 10.dp),
+                                    model = AUTHOR_PHOTO_PATH + postDetails?.author?.photo,
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillWidth
+                                )
+                                Text(
+                                    text = postDetails?.author?.name ?: "",
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    modifier = Modifier.padding(bottom = 20.dp)
+                                )
+                                Text(
+                                    text = postDetails?.author?.bio ?: "",
+                                    fontSize = 14.sp,
+                                    modifier = Modifier.padding(bottom = 20.dp)
+                                )
+                            }
+
                         }
                     }
                 }
