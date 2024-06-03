@@ -16,9 +16,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -79,6 +81,12 @@ enum class PostTabs(
         label = App.context.getString(R.string.discussion),
         selectedIcon = Icons.Filled.Chat,
         unselectedIcon = Icons.Outlined.Chat
+    ),
+    Author(
+    id = "author",
+    label = App.context.getString(R.string.author),
+    selectedIcon = Icons.Filled.Person,
+    unselectedIcon = Icons.Outlined.Person
     )
 }
 
@@ -142,7 +150,7 @@ fun PostScreen(
                         .padding( start = 20.dp, end = 20.dp, bottom = 20.dp)
                 ) {
                     when (page) {
-                        0 -> {
+                        PostTabs.Challenge.ordinal -> {
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -159,12 +167,30 @@ fun PostScreen(
                             }
                         }
 
-                        1 -> {
+                        PostTabs.Solution.ordinal -> {
                             Text("Solution goes here")
+/*                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                Text(
+                                    text = postDetails?.title ?: "",
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    modifier = Modifier.padding(bottom = 20.dp)
+                                )
+                                Text(text = postDetails?.description?.replace("\\n","\n") ?: "", fontSize = 14.sp)
+
+                            }*/
                         }
 
-                        2 -> {
+                        PostTabs.Discussion.ordinal -> {
                             Text("Chat goes here")
+                        }
+
+                        PostTabs.Author.ordinal -> {
+                            Text("Author goes here")
                         }
                     }
                     //Text(text = PostTabs.entries[selectedTabIndex.value].label)
