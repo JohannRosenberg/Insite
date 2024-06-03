@@ -1,11 +1,12 @@
 package io.github.johannrosenberg.insite.ui.screens.post
 
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +18,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Quiz
@@ -25,6 +25,7 @@ import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Quiz
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +47,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat.startActivity
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.models.PostDetails
@@ -57,6 +58,7 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_END
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_TOP
 import io.github.johannrosenberg.insite.ui.theme.AppColors
+import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
 import io.github.johannrosenberg.jetmagic.navigation.navman
@@ -79,12 +81,6 @@ enum class PostTabs(
         label = App.context.getString(R.string.solution),
         selectedIcon = Icons.Filled.List,
         unselectedIcon = Icons.Outlined.List
-    ),
-    Discussion(
-        id = "discussion",
-        label = App.context.getString(R.string.discussion),
-        selectedIcon = Icons.Filled.Chat,
-        unselectedIcon = Icons.Outlined.Chat
     ),
     Author(
         id = "author",
@@ -109,6 +105,12 @@ fun PostHandler(composableInstance: ComposableInstance) {
             onBackButtonClick = {
                 navman.goBack()
             },
+            onLaunchDiscussion = { discussionUrl ->
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(discussionUrl))
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(App.context, intent, null)
+
+            }
         )
     }
 }
@@ -118,6 +120,7 @@ fun PostHandler(composableInstance: ComposableInstance) {
 fun PostScreen(
     postDetails: PostDetails?,
     onBackButtonClick: () -> Unit,
+    onLaunchDiscussion: (discussionUrl: String) -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { PostTabs.entries.size })
@@ -187,32 +190,26 @@ fun PostScreen(
 
                                     i++
                                 }
-                            }
-                        }
 
-                        PostTabs.Discussion.ordinal -> {
-                            AndroidView(
-                                factory = { context ->
-                                    WebView(context).apply {
-                                        settings.javaScriptEnabled = true
-                                        webViewClient = WebViewClient()
+                                Spacer(modifier = Modifier.height(20.dp))
 
-                                        settings.loadWithOverviewMode = true
-                                        settings.useWideViewPort = true
-                                        settings.setSupportZoom(true)
+                                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Button(
+                                        colors = AppColors.defaultButtonColors,
+                                        onClick = {
+                                            onLaunchDiscussion(postDetails?.discussionUrl ?: "")
+                                        }) {
+                                        Icon(Icons.Outlined.Chat, contentDescription = null)
+                                        Text("Discussion", modifier = Modifier.padding(start = 10.dp), fontSize = 18.sp, color = MaterialColors.white)
                                     }
-                                },
-                                update = { webView ->
-                                    webView.loadUrl(postDetails?.discussionUrl ?: "")
                                 }
-                            )
+                            }
                         }
 
                         PostTabs.Author.ordinal -> {
                             Text("Author goes here")
                         }
                     }
-                    //Text(text = PostTabs.entries[selectedTabIndex.value].label)
                 }
             }
 

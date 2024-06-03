@@ -118,7 +118,7 @@ object AppColors {
     val defaultButtonColors: ButtonColors
         get() {
             return ButtonColors(
-                containerColor = MaterialColors.lightBlue500,
+                containerColor = MaterialColors.cyan500,
                 contentColor = MaterialColors.white,
                 disabledContainerColor = MaterialColors.gray300,
                 disabledContentColor = MaterialColors.gray700
