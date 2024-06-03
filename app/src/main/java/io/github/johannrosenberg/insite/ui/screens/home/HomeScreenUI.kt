@@ -157,7 +157,7 @@ fun HomeScreen(
                                 }) {
                                     Icon(
                                         modifier = Modifier.size(APPBAR_ICON_SIZE),
-                                        tint = AppColors.toolbarIcon,
+                                        tint = MaterialColors.tealA100,
                                         imageVector = Icons.Filled.FilterList,
                                         contentDescription = ""
                                     )

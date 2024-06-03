@@ -1,5 +1,7 @@
 package io.github.johannrosenberg.insite.ui.screens.post
 
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -43,6 +46,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.models.PostDetails
@@ -83,10 +87,10 @@ enum class PostTabs(
         unselectedIcon = Icons.Outlined.Chat
     ),
     Author(
-    id = "author",
-    label = App.context.getString(R.string.author),
-    selectedIcon = Icons.Filled.Person,
-    unselectedIcon = Icons.Outlined.Person
+        id = "author",
+        label = App.context.getString(R.string.author),
+        selectedIcon = Icons.Filled.Person,
+        unselectedIcon = Icons.Outlined.Person
     )
 }
 
@@ -147,7 +151,7 @@ fun PostScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding( start = 20.dp, end = 20.dp, bottom = 20.dp)
+                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
                 ) {
                     when (page) {
                         PostTabs.Challenge.ordinal -> {
@@ -162,31 +166,46 @@ fun PostScreen(
                                     fontWeight = FontWeight.SemiBold,
                                     modifier = Modifier.padding(bottom = 20.dp)
                                 )
-                                Text(text = postDetails?.description?.replace("\\n","\n") ?: "", fontSize = 14.sp)
+                                Text(text = postDetails?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
 
                             }
                         }
 
                         PostTabs.Solution.ordinal -> {
-                            Text("Solution goes here")
-/*                            Column(
+                            Column(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .verticalScroll(rememberScrollState())
                             ) {
-                                Text(
-                                    text = postDetails?.title ?: "",
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    modifier = Modifier.padding(bottom = 20.dp)
-                                )
-                                Text(text = postDetails?.description?.replace("\\n","\n") ?: "", fontSize = 14.sp)
+                                var i = 1
 
-                            }*/
+                                postDetails?.points?.forEach { post ->
+                                    Row(modifier = Modifier.fillMaxWidth()) {
+                                        Text(i.toString() + ".", modifier = Modifier.width(30.dp), fontSize = 14.sp)
+                                        Text(post.text, fontSize = 14.sp, modifier = Modifier.padding(bottom = 15.dp))
+                                    }
+
+                                    i++
+                                }
+                            }
                         }
 
                         PostTabs.Discussion.ordinal -> {
-                            Text("Chat goes here")
+                            AndroidView(
+                                factory = { context ->
+                                    WebView(context).apply {
+                                        settings.javaScriptEnabled = true
+                                        webViewClient = WebViewClient()
+
+                                        settings.loadWithOverviewMode = true
+                                        settings.useWideViewPort = true
+                                        settings.setSupportZoom(true)
+                                    }
+                                },
+                                update = { webView ->
+                                    webView.loadUrl(postDetails?.discussionUrl ?: "")
+                                }
+                            )
                         }
 
                         PostTabs.Author.ordinal -> {
