@@ -74,6 +74,5 @@ dependencies {
     implementation(libs.com.squareup.retrofit2.converter.scalars)
     implementation(libs.io.coil.compose)
     implementation(libs.io.coil.svg)
-    implementation(libs.com.github.jeziellago)
 
 }

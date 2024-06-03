@@ -36,7 +36,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.models.PostDetails
@@ -130,25 +132,34 @@ fun PostScreen(
                 state = pagerState, modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-            ) {page ->
-                Box(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp)) {
+            ) { page ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(20.dp)
+                ) {
                     when (page) {
                         0 -> {
                             Column(
-                                modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
                             ) {
-                                repeat(50){
-                                    Text(it.toString())
-                                }
+                                Text(
+                                    text = postDetails?.title ?: "",
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    modifier = Modifier.padding(bottom = 20.dp)
+                                )
+                                Text(text = postDetails?.description ?: "", fontSize = 14.sp)
 
                             }
-                            //MarkdownText(markdown = postDetails?.challenge ?: "", modifier = Modifier.fillMaxSize())
                         }
+
                         1 -> {
                             Text("Solution goes here")
                         }
+
                         2 -> {
                             Text("Chat goes here")
                         }
