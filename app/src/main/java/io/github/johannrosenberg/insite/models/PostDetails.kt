@@ -1,7 +1,8 @@
 package io.github.johannrosenberg.insite.models
 
 data class PostDetails(
-    val challenge: String = "",
-    val solution: String = "",
-    val discussionUrl: String = ""
+    val title: String,
+    val description: String,
+    val points: List<String>,
+    val author: Author,
 )

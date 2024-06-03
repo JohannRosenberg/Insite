@@ -1,5 +1,6 @@
 package io.github.johannrosenberg.insite.da.web
 
+import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.models.QuizPostings
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -22,5 +23,5 @@ interface WebAPI {
     suspend fun getQuizPostings(): QuizPostings
 
     @GET
-    suspend fun getPostDetails(@Url url: String): String
+    suspend fun getPostDetails(@Url url: String): PostDetails
 }

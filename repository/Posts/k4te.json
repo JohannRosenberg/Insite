@@ -1,0 +1,164 @@
+{
+  "title": "Choosing a reliable car",
+  "description": "Your price range is between $35k and $75k. You want to buy something that is environmentally friendly, is known for its reliability and if possible is domestically manufactured.",
+  "points": [
+    {
+      "text": "The latest sports car models offer cutting-edge technology and stunning performance."
+    },
+    {
+      "text": "Electric vehicles are becoming increasingly popular due to their environmental benefits and efficiency."
+    },
+    {
+      "text": "Modern cars come equipped with advanced safety features to protect passengers and ensure a safer drive."
+    },
+    {
+      "text": "SUVs are favored for their spacious interiors, off-road capabilities, and versatility."
+    },
+    {
+      "text": "Hybrid cars use a combination of gasoline and electric power to improve fuel efficiency and reduce emissions."
+    },
+    {
+      "text": "Luxury cars often feature high-end materials and the latest automotive technology, providing comfort and performance."
+    },
+    {
+      "text": "Convertible cars offer an exhilarating open-air driving experience, perfect for sunny days and scenic drives."
+    },
+    {
+      "text": "Compact cars are ideal for city driving, offering great fuel economy and ease of parking."
+    },
+    {
+      "text": "Self-driving cars are being developed to increase safety and reduce the need for human intervention during driving."
+    },
+    {
+      "text": "The automotive industry is evolving rapidly with advancements in electric and autonomous vehicle technologies."
+    },
+    {
+      "text": "Car enthusiasts often customize their vehicles to enhance performance, aesthetics, and personalize their ride."
+    },
+    {
+      "text": "Many cars now offer infotainment systems with touchscreens, smartphone connectivity, and voice controls."
+    },
+    {
+      "text": "Sports utility vehicles (SUVs) are popular for their versatility, spaciousness, and robustness on various terrains."
+    },
+    {
+      "text": "Classic cars are cherished by collectors and enthusiasts for their historical value and unique designs."
+    },
+    {
+      "text": "The future of cars includes innovations like autonomous driving, enhanced connectivity, and sustainable power sources."
+    },
+    {
+      "text": "Fuel efficiency is a major consideration for car buyers looking to save on fuel costs and reduce environmental impact."
+    },
+    {
+      "text": "Electric cars are quiet, produce no emissions, and require less maintenance compared to traditional gasoline cars."
+    },
+    {
+      "text": "Many car manufacturers are heavily investing in electric and hybrid technologies to meet future demands."
+    },
+    {
+      "text": "The interior of modern cars is designed to provide comfort, convenience, and advanced technology for passengers."
+    },
+    {
+      "text": "Safety features in cars have advanced significantly, including lane assist, automatic braking, and collision avoidance systems."
+    },
+    {
+      "text": "Performance cars are built to deliver high speed, superior handling, and an exhilarating driving experience."
+    },
+    {
+      "text": "The design of a car can greatly influence its aerodynamics, fuel efficiency, and overall performance on the road."
+    },
+    {
+      "text": "Modern cars often include features such as GPS navigation, rearview cameras, parking sensors, and advanced driver assistance systems."
+    },
+    {
+      "text": "Electric vehicle charging infrastructure is expanding rapidly to support the growing demand for electric cars."
+    },
+    {
+      "text": "Luxury car brands offer a range of bespoke options for customization, allowing owners to personalize their vehicles."
+    },
+    {
+      "text": "Regular car maintenance and servicing are crucial for ensuring long-term performance, reliability, and safety."
+    },
+    {
+      "text": "Hybrid cars combine the benefits of electric and gasoline engines to reduce emissions and improve fuel efficiency."
+    },
+    {
+      "text": "Some cars are designed specifically for high performance in motorsports, featuring specialized components and engineering."
+    },
+    {
+      "text": "The automotive industry is a major contributor to technological advancements and innovation in various fields."
+    },
+    {
+      "text": "Car design trends are constantly evolving to meet consumer preferences, regulatory requirements, and technological advancements."
+    },
+    {
+      "text": "Many modern cars feature advanced driver assistance systems to improve safety, convenience, and driving experience."
+    },
+    {
+      "text": "SUVs are popular for their ability to handle various terrains and weather conditions, making them versatile and reliable."
+    },
+    {
+      "text": "Electric cars are an important part of efforts to reduce carbon emissions, combat climate change, and promote sustainable transportation."
+    },
+    {
+      "text": "The infotainment systems in cars have become more sophisticated, offering a range of apps, services, and connectivity options."
+    },
+    {
+      "text": "Convertible cars are loved for their stylish looks and the joy of open-air driving, providing a unique driving experience."
+    },
+    {
+      "text": "Compact cars are ideal for urban environments due to their size, maneuverability, and excellent fuel economy."
+    },
+    {
+      "text": "Self-driving technology aims to make roads safer by reducing human error and increasing automation in driving."
+    },
+    {
+      "text": "Electric vehicle technology is progressing rapidly, with improvements in range, charging times, and overall performance."
+    },
+    {
+      "text": "Collectors often seek out rare and vintage cars as valuable investments, appreciating their historical and cultural significance."
+    },
+    {
+      "text": "The integration of artificial intelligence in cars is enhancing driving experience, safety, and vehicle management."
+    },
+    {
+      "text": "Performance and efficiency are key factors in the development of new car models, balancing speed, power, and sustainability."
+    },
+    {
+      "text": "Car sharing services are becoming more popular, offering flexible and cost-effective transportation options for urban dwellers."
+    },
+    {
+      "text": "The automotive market is seeing a rise in the popularity of electric and hybrid vehicles, driven by consumer demand and regulations."
+    },
+    {
+      "text": "Automakers are increasingly focusing on sustainability, reducing the environmental impact of manufacturing and driving."
+    },
+    {
+      "text": "The automotive industry employs millions of people worldwide in various capacities, from manufacturing to sales and service."
+    },
+    {
+      "text": "Safety and reliability are top priorities for car manufacturers and consumers alike, driving continuous improvements and innovations."
+    },
+    {
+      "text": "Luxury cars offer a high level of comfort, performance, and prestige, often featuring the latest in technology and design."
+    },
+    {
+      "text": "The development of autonomous vehicles is one of the most exciting advancements in the automotive field, promising to revolutionize transportation."
+    },
+    {
+      "text": "Many car enthusiasts enjoy modifying their vehicles to enhance both performance and appearance, making them unique and personalized."
+    },
+    {
+      "text": "The shift towards electric vehicles is driven by the need for sustainable transportation solutions and reducing reliance on fossil fuels."
+    }
+  ],
+  "author": {
+    "id": "johannrosenberg",
+    "author": "Johann Rosenberg",
+    "bio": "Software developer that specializes in Android and web development. Has been developing software applications since the mid 1980s and wrote his first program using a punchcard on mainframe computer. Bornn and raised in Canada, he has lived in Israel and now resides in Germany.",
+    "photo": "johann.jpg",
+    "url1": "https://github.com/JohannRosenberg",
+    "url2": "https://www.linkedin.com/in/johannrosenberg/"
+  }
+}

@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.List
@@ -129,11 +131,20 @@ fun PostScreen(
                     .fillMaxWidth()
                     .weight(1f)
             ) {page ->
-                Box(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)) {
                     when (page) {
                         0 -> {
+                            Column(
+                                modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                            ) {
+                                repeat(50){
+                                    Text(it.toString())
+                                }
+
+                            }
                             //MarkdownText(markdown = postDetails?.challenge ?: "", modifier = Modifier.fillMaxSize())
-                            Text("Some very long text will be shown here. Today I watched a documentary on Jim Henson, the creeator the Muppets. I enjoyed this when I was a kid.")
                         }
                         1 -> {
                             Text("Solution goes here")
