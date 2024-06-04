@@ -4,7 +4,7 @@ data class PostDetails(
     val title: String = "",
     val description: String = "",
     val discussionUrl: String = "",
-    val points: List<Point> = emptyList(),
+    val keyPoints: List<Point> = emptyList(),
     val author: Author = Author(),
 )
 

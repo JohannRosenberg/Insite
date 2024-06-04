@@ -198,7 +198,7 @@ fun PostScreen(
                             ) {
                                 var i = 1
 
-                                postDetails?.points?.forEach { post ->
+                                postDetails?.keyPoints?.forEach { post ->
                                     Row(modifier = Modifier.fillMaxWidth()) {
                                         Text(i.toString() + ".", modifier = Modifier.width(30.dp), fontSize = 14.sp)
                                         Text(post.text, fontSize = 14.sp, modifier = Modifier.padding(bottom = 15.dp))
