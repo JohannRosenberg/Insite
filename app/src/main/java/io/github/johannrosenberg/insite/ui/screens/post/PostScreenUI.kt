@@ -28,6 +28,7 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -196,7 +197,21 @@ fun PostScreen(
                                     .fillMaxSize()
                                     .verticalScroll(rememberScrollState())
                             ) {
-                                Text(text = postDetails?.solution?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
+                                Text(
+                                    text = postDetails?.solution?.description?.replace("\\n", "\n") ?: "",
+                                    modifier = Modifier.padding(bottom = 30.dp),
+                                    fontSize = 14.sp
+                                )
+
+                                HorizontalDivider(thickness = 1.dp, color = MaterialColors.white,)
+
+                                Text(
+                                    text = App.context.getString(R.string.key_points),
+                                    modifier = Modifier.padding(top = 30.dp, bottom = 20.dp),
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialColors.tealA100,
+                                    fontSize = 18.sp
+                                )
 
                                 var i = 1
 
