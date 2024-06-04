@@ -4,10 +4,15 @@ data class PostDetails(
     val title: String = "",
     val description: String = "",
     val discussionUrl: String = "",
-    val keyPoints: List<Point> = emptyList(),
+    val solution: Solution = Solution(),
     val author: Author = Author(),
 )
 
-data class Point(
+data class Solution(
+    val description: String = "",
+    val keyPoints: List<KeyPoint> = emptyList(),
+)
+
+data class KeyPoint(
     val text: String = "",
 )

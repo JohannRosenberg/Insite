@@ -196,9 +196,11 @@ fun PostScreen(
                                     .fillMaxSize()
                                     .verticalScroll(rememberScrollState())
                             ) {
+                                Text(text = postDetails?.solution?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
+
                                 var i = 1
 
-                                postDetails?.keyPoints?.forEach { post ->
+                                postDetails?.solution?.keyPoints?.forEach { post ->
                                     Row(modifier = Modifier.fillMaxWidth()) {
                                         Text(i.toString() + ".", modifier = Modifier.width(30.dp), fontSize = 14.sp)
                                         Text(post.text, fontSize = 14.sp, modifier = Modifier.padding(bottom = 15.dp))
