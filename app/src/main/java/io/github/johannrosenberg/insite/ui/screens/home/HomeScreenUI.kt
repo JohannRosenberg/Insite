@@ -48,6 +48,7 @@ import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
 import io.github.johannrosenberg.insite.da.web.CATEGORY_BACKGROUND_IMAGE_PATH
+import io.github.johannrosenberg.insite.models.Levels
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
@@ -102,11 +103,19 @@ fun HomeScreen(
     var showFilterMenu by remember { mutableStateOf(false) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize()
-            .paint(
-                painter = rememberAsyncImagePainter(CATEGORY_BACKGROUND_IMAGE_PATH + Repository.getRootCategoryId(categoryId).lowercase() + ".jpg"),
-                contentScale = ContentScale.FillBounds,
-                alpha = 0.25f) ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .paint(
+                    painter = rememberAsyncImagePainter(
+                        CATEGORY_BACKGROUND_IMAGE_PATH + Repository
+                            .getRootCategoryId(categoryId)
+                            .lowercase() + ".jpg"
+                    ),
+                    contentScale = ContentScale.FillBounds,
+                    alpha = 0.25f
+                )
+        ) {
             TopAppBar(
                 modifier = Modifier
                     .height(ScreenGlobals.DEFAULT_APPBAR_HEIGHT),
@@ -229,7 +238,13 @@ fun HomeScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text(text = post.date, fontSize = 12.sp)
+                                Text(
+                                    text = post.date, fontSize = 12.sp, color = when (post.level) {
+                                        Levels.EASY -> MaterialColors.green50
+                                        Levels.MODERATE -> MaterialColors.yellow50
+                                        else -> MaterialColors.red50
+                                    }
+                                )
                                 Text(
                                     text = Repository.getCategoryNameById(post.category),
                                     fontSize = 12.sp
