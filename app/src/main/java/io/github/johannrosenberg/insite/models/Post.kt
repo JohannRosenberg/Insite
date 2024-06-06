@@ -1,5 +1,6 @@
 package io.github.johannrosenberg.insite.models
 
+import com.google.gson.annotations.SerializedName
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 
@@ -13,8 +14,13 @@ data class Post (
 )
 
 enum class Levels(level: String) {
+    @SerializedName("easy")
     EASY("easy"),
+
+    @SerializedName("moderate")
     MODERATE("moderate"),
+
+    @SerializedName("hard")
     HARD("hard");
 
     override fun toString(): String {

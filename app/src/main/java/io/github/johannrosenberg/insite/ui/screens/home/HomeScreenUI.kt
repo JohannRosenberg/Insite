@@ -230,8 +230,12 @@ fun HomeScreen(
                             Row(modifier = Modifier.padding(bottom = 10.dp)) {
                                 Text(
                                     text = post.title,
-                                    color = MaterialColors.tealA100,
-                                    fontWeight = FontWeight.W300
+                                    fontWeight = FontWeight.W300,
+                                    color = when (post.level) {
+                                        Levels.EASY -> MaterialColors.tealA200
+                                        Levels.MODERATE -> MaterialColors.yellow300
+                                        else -> MaterialColors.red200
+                                    }
                                 )
                             }
                             Row(
@@ -239,11 +243,7 @@ fun HomeScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text(
-                                    text = post.date, fontSize = 12.sp, color = when (post.level) {
-                                        Levels.EASY -> MaterialColors.green50
-                                        Levels.MODERATE -> MaterialColors.yellow50
-                                        else -> MaterialColors.red50
-                                    }
+                                    text = post.date, fontSize = 12.sp
                                 )
                                 Text(
                                     text = Repository.getCategoryNameById(post.category),
