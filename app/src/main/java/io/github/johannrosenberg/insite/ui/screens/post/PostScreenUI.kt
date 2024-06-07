@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -190,7 +191,9 @@ fun PostScreen(
                                     fontWeight = FontWeight.SemiBold,
                                     modifier = Modifier.padding(bottom = 20.dp)
                                 )
-                                //Text(text = postDetails?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
+                                Text(
+                                    text = postDetails?.level.toString(), textAlign = TextAlign.End
+                                )
                                 Markdown(lines = challenge)
 
                             }
@@ -203,33 +206,6 @@ fun PostScreen(
                                     .verticalScroll(rememberScrollState())
                             ) {
                                 Markdown(lines = solution)
-
-                                /*Text(
-                                    text = postDetails?.solution?.description?.replace("\\n", "\n") ?: "",
-                                    modifier = Modifier.padding(bottom = 30.dp),
-                                    fontSize = 14.sp
-                                )
-
-                                HorizontalDivider(thickness = 1.dp, color = MaterialColors.white,)
-
-                                Text(
-                                    text = App.context.getString(R.string.key_points),
-                                    modifier = Modifier.padding(top = 30.dp, bottom = 20.dp),
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialColors.tealA100,
-                                    fontSize = 18.sp
-                                )
-
-                                var i = 1
-
-                                postDetails?.solution?.keyPoints?.forEach { post ->
-                                    Row(modifier = Modifier.fillMaxWidth()) {
-                                        Text(i.toString() + ".", modifier = Modifier.width(30.dp), fontSize = 14.sp)
-                                        Text(post.text, fontSize = 14.sp, modifier = Modifier.padding(bottom = 15.dp))
-                                    }
-
-                                    i++
-                                }*/
 
                                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -274,28 +250,28 @@ fun PostScreen(
 
                                 if (postDetails?.author?.url1 != null) {
                                     Text(
-                                        text = postDetails?.author?.url1 ?: "",
+                                        text = postDetails.author.url1,
                                         color = MaterialColors.lightBlue300,
                                         fontSize = 14.sp,
                                         textDecoration = TextDecoration.Underline,
                                         modifier = Modifier
                                             .padding(bottom = 20.dp)
                                             .clickable {
-                                                onAuthorLink1Click(postDetails.author.url1 ?: "")
+                                                onAuthorLink1Click(postDetails.author.url1)
                                             }
                                     )
                                 }
 
                                 if (postDetails?.author?.url2 != null) {
                                     Text(
-                                        text = postDetails?.author?.url2 ?: "",
+                                        text = postDetails.author.url2,
                                         color = MaterialColors.lightBlue300,
                                         fontSize = 14.sp,
                                         textDecoration = TextDecoration.Underline,
                                         modifier = Modifier
                                             .padding(bottom = 30.dp)
                                             .clickable {
-                                                onAuthorLink1Click(postDetails.author.url2 ?: "")
+                                                onAuthorLink2Click(postDetails.author.url2)
                                             }
                                     )
                                 }
