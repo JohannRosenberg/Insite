@@ -11,7 +11,8 @@ class Markdown() {
         items.forEach {
             when (true) {
                 it.trim().startsWith("#") -> {
-                    lines.add(LineInfo(text = it.trim(), lineType = headerLevel(it)))
+                    val hashEndPos = it.indexOf(" ")
+                    lines.add(LineInfo(text = it.substring(hashEndPos + 1).trim(), lineType = headerLevel(it)))
                 }
 
                 it.trim().startsWith("* ") -> {

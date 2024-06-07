@@ -25,7 +25,7 @@ fun Markdown(
                 Text(
                     text = it.text, fontSize = when (it.lineType) {
                         LineType.H1 -> 24.sp
-                        LineType.H2 -> 22.sp
+                        LineType.H2 -> 18.sp
                         LineType.H3 -> 20.sp
                         LineType.H4 -> 18.sp
                         LineType.H5 -> 16.sp
@@ -64,7 +64,7 @@ fun Markdown(
             }
 
             else -> {
-                Text(text = it.text, fontSize = 14.sp)
+                Text(text = it.text, fontSize = 14.sp, modifier = Modifier.padding(bottom = 10.dp))
             }
         }
     }
