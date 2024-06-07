@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -28,7 +27,6 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -55,9 +53,11 @@ import androidx.core.content.ContextCompat.startActivity
 import coil.compose.AsyncImage
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
+import io.github.johannrosenberg.insite.da.LineInfo
 import io.github.johannrosenberg.insite.da.web.AUTHOR_PHOTO_PATH
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
+import io.github.johannrosenberg.insite.ui.components.Markdown
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_BOTTOM
@@ -114,6 +114,8 @@ fun PostHandler(composableInstance: ComposableInstance) {
 
         PostScreen(
             postDetails = vm.postDetails.value,
+            challenge = vm.challengee,
+            solution = vm.solution,
             onBackButtonClick = {
                 navman.goBack()
             },
@@ -134,6 +136,8 @@ fun PostHandler(composableInstance: ComposableInstance) {
 @Composable
 fun PostScreen(
     postDetails: PostDetails?,
+    challenge: MutableList<LineInfo>,
+    solution: MutableList<LineInfo>,
     onBackButtonClick: () -> Unit,
     onLaunchDiscussion: (discussionUrl: String) -> Unit,
     onAuthorLink1Click: (url: String) -> Unit,
@@ -186,7 +190,8 @@ fun PostScreen(
                                     fontWeight = FontWeight.SemiBold,
                                     modifier = Modifier.padding(bottom = 20.dp)
                                 )
-                                Text(text = postDetails?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
+                                //Text(text = postDetails?.description?.replace("\\n", "\n") ?: "", fontSize = 14.sp)
+                                Markdown(lines = challenge)
 
                             }
                         }
@@ -197,7 +202,9 @@ fun PostScreen(
                                     .fillMaxSize()
                                     .verticalScroll(rememberScrollState())
                             ) {
-                                Text(
+                                Markdown(lines = solution)
+
+                                /*Text(
                                     text = postDetails?.solution?.description?.replace("\\n", "\n") ?: "",
                                     modifier = Modifier.padding(bottom = 30.dp),
                                     fontSize = 14.sp
@@ -222,7 +229,7 @@ fun PostScreen(
                                     }
 
                                     i++
-                                }
+                                }*/
 
                                 Spacer(modifier = Modifier.height(20.dp))
 
