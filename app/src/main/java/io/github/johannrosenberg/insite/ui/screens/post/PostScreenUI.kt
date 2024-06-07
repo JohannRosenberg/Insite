@@ -176,7 +176,7 @@ fun PostScreen(
                 actions = {
                     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
                         Text(
-                            text = postDetails?.level.toString(), textAlign = TextAlign.End, color = MaterialColors.white,
+                            text = postDetails?.level.toString(), textAlign = TextAlign.End,
                             modifier = Modifier
                                 .wrapContentWidth()
                                 .background(
@@ -187,7 +187,9 @@ fun PostScreen(
                                         else -> challengeLevelHardText
                                     },
                                     shape = RoundedCornerShape(5.dp)
-                                ).padding(horizontal = 10.dp, vertical = 3.dp),
+                                )
+                                .padding(horizontal = 10.dp, vertical = 3.dp),
+                            color = MaterialColors.black,
                             fontSize = 14.sp
                         )
                     }
