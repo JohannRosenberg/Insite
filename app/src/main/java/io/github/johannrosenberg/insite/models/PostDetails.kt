@@ -6,5 +6,5 @@ data class PostDetails(
     val discussionUrl: String = "",
     val solution: String = "",
     val author: Author = Author(),
-    val level: Levels
+    val level: Levels = Levels.MODERATE
 )

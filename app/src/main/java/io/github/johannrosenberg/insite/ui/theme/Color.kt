@@ -130,6 +130,22 @@ object AppColors {
             return defaultButtonColors.copy(containerColor = MaterialColors.red400)
         }
 
+    val challengeLevelEasyText: Color
+        get() {
+            return MaterialColors.tealA200
+        }
+
+    val challengeLevelModerateText: Color
+        get() {
+            return MaterialColors.yellow300
+        }
+
+    val challengeLevelHardText: Color
+        get() {
+            return MaterialColors.red200
+        }
+
+
     lateinit var defaultSwitchColors: SwitchColors
 
     @Composable

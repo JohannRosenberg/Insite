@@ -3,6 +3,7 @@ package io.github.johannrosenberg.insite.ui.screens.post
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,9 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -56,6 +59,7 @@ import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.LineInfo
 import io.github.johannrosenberg.insite.da.web.AUTHOR_PHOTO_PATH
+import io.github.johannrosenberg.insite.models.Levels
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
 import io.github.johannrosenberg.insite.ui.components.Markdown
@@ -65,6 +69,9 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_END
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_TOP
 import io.github.johannrosenberg.insite.ui.theme.AppColors
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelEasyText
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelHardText
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelModerateText
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -165,6 +172,25 @@ fun PostScreen(
                     Row(Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
                         BackButton(onBackButtonClick = onBackButtonClick)
                     }
+                },
+                actions = {
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
+                        Text(
+                            text = postDetails?.level.toString(), textAlign = TextAlign.End, color = MaterialColors.white,
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .background(
+                                    color =
+                                    when (postDetails?.level) {
+                                        Levels.EASY -> challengeLevelEasyText
+                                        Levels.MODERATE -> challengeLevelModerateText
+                                        else -> challengeLevelHardText
+                                    },
+                                    shape = RoundedCornerShape(5.dp)
+                                ).padding(horizontal = 10.dp, vertical = 3.dp),
+                            fontSize = 14.sp
+                        )
+                    }
                 }
             )
 
@@ -191,9 +217,7 @@ fun PostScreen(
                                     fontWeight = FontWeight.SemiBold,
                                     modifier = Modifier.padding(bottom = 20.dp)
                                 )
-                                Text(
-                                    text = postDetails?.level.toString(), textAlign = TextAlign.End
-                                )
+
                                 Markdown(lines = challenge)
 
                             }

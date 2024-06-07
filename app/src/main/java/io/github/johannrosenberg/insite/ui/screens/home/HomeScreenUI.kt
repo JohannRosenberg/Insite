@@ -57,6 +57,9 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZ
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
 import io.github.johannrosenberg.insite.ui.screens.main.MainViewModel
 import io.github.johannrosenberg.insite.ui.theme.AppColors
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelEasyText
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelHardText
+import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelModerateText
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -232,9 +235,9 @@ fun HomeScreen(
                                     text = post.title,
                                     fontWeight = FontWeight.W300,
                                     color = when (post.level) {
-                                        Levels.EASY -> MaterialColors.tealA200
-                                        Levels.MODERATE -> MaterialColors.yellow300
-                                        else -> MaterialColors.red200
+                                        Levels.EASY -> challengeLevelEasyText
+                                        Levels.MODERATE -> challengeLevelModerateText
+                                        else -> challengeLevelHardText
                                     }
                                 )
                             }
