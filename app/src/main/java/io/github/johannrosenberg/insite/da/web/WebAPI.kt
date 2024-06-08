@@ -7,7 +7,7 @@ import retrofit2.http.Url
 
 const val API_BASE_ADDRESS = "https://raw.githubusercontent.com/JohannRosenberg/Insite/main/repository/"
 const val NAV_MENU_ICON_PATH = API_BASE_ADDRESS + "NavMenuIcons/"
-const val CATEGORY_BACKGROUND_IMAGE_PATH = API_BASE_ADDRESS + "images/"
+const val IMAGES_PATH = API_BASE_ADDRESS + "images/"
 const val POST_PATH = API_BASE_ADDRESS + "Posts/"
 const val AUTHOR_PHOTO_PATH = API_BASE_ADDRESS + "author-photos/"
 

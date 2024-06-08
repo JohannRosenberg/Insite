@@ -59,6 +59,7 @@ import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.LineInfo
 import io.github.johannrosenberg.insite.da.web.AUTHOR_PHOTO_PATH
+import io.github.johannrosenberg.insite.da.web.IMAGES_PATH
 import io.github.johannrosenberg.insite.models.Levels
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
@@ -213,6 +214,8 @@ fun PostScreen(
                                     .fillMaxSize()
                                     .verticalScroll(rememberScrollState())
                             ) {
+                                AsyncImage(model = IMAGES_PATH + postDetails?.id, contentScale = ContentScale.FillWidth,  contentDescription = "")
+
                                 Text(
                                     text = postDetails?.title ?: "",
                                     fontSize = 20.sp,

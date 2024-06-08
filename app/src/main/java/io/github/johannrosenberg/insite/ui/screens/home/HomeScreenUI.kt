@@ -47,7 +47,7 @@ import coil.compose.rememberAsyncImagePainter
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
-import io.github.johannrosenberg.insite.da.web.CATEGORY_BACKGROUND_IMAGE_PATH
+import io.github.johannrosenberg.insite.da.web.IMAGES_PATH
 import io.github.johannrosenberg.insite.models.Levels
 import io.github.johannrosenberg.insite.models.QuizPostings
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
@@ -111,7 +111,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .paint(
                     painter = rememberAsyncImagePainter(
-                        CATEGORY_BACKGROUND_IMAGE_PATH + Repository
+                        IMAGES_PATH + Repository
                             .getRootCategoryId(categoryId)
                             .lowercase() + ".jpg"
                     ),
