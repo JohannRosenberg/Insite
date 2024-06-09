@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="../../blob/main/images/insite-screenshot-2560x1020.jpg" width="1280" height="510" />
+    <img src="../../blob/main/images/insite-screenshot-2560x1020.jpg" width="1280" height="331" />
 </p>
 
 # Insite
