@@ -3,7 +3,6 @@ package io.github.johannrosenberg.insite.ui.screens.post
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,11 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -49,7 +46,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,20 +55,17 @@ import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.LineInfo
 import io.github.johannrosenberg.insite.da.web.AUTHOR_PHOTO_PATH
-import io.github.johannrosenberg.insite.da.web.IMAGES_PATH
-import io.github.johannrosenberg.insite.models.Levels
+import io.github.johannrosenberg.insite.models.Post
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.ui.components.BackButton
 import io.github.johannrosenberg.insite.ui.components.Markdown
+import io.github.johannrosenberg.insite.ui.components.PostHeader
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZE
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_BOTTOM
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_END
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_PADDING_TOP
 import io.github.johannrosenberg.insite.ui.theme.AppColors
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelEasyText
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelHardText
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelModerateText
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -111,9 +104,9 @@ fun PostHandler(composableInstance: ComposableInstance) {
     CompositionLocalProvider(LocalComposableInstance provides composableInstance) {
 
         val vm = composableInstance.viewmodel as PostViewModel
-        val postId = composableInstance.parameters as String
+        val post = composableInstance.parameters as Post
 
-        vm.getPostDetails(postId)
+        vm.getPostDetails(post.id)
 
         fun launchUrlInBrowser(url: String) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -122,6 +115,7 @@ fun PostHandler(composableInstance: ComposableInstance) {
         }
 
         PostScreen(
+            post = post,
             postDetails = vm.postDetails.value,
             challenge = vm.challengee,
             solution = vm.solution,
@@ -144,7 +138,8 @@ fun PostHandler(composableInstance: ComposableInstance) {
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PostScreen(
-    postDetails: PostDetails?,
+    post: Post,
+    postDetails: PostDetails,
     challenge: MutableList<LineInfo>,
     solution: MutableList<LineInfo>,
     onBackButtonClick: () -> Unit,
@@ -173,175 +168,141 @@ fun PostScreen(
                     Row(Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
                         BackButton(onBackButtonClick = onBackButtonClick)
                     }
-                },
-                actions = {
-                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
-                        Text(
-                            text = postDetails?.level.toString(), textAlign = TextAlign.End,
-                            modifier = Modifier
-                                .wrapContentWidth()
-                                .background(
-                                    color =
-                                    when (postDetails?.level) {
-                                        Levels.EASY -> challengeLevelEasyText
-                                        Levels.MODERATE -> challengeLevelModerateText
-                                        else -> challengeLevelHardText
-                                    },
-                                    shape = RoundedCornerShape(5.dp)
-                                )
-                                .padding(horizontal = 10.dp, vertical = 3.dp),
-                            color = MaterialColors.black,
-                            fontSize = 14.sp
-                        )
-                    }
                 }
             )
 
-            if (postDetails?.id != null) {
-                HorizontalPager(
-                    state = pagerState, modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) { page ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
-                    ) {
-                        when (page) {
-                            PostTabs.Challenge.ordinal -> {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .verticalScroll(rememberScrollState())
-                                ) {
-                                    AsyncImage(
-                                        model = IMAGES_PATH + postDetails.id + ".jpg",
-                                        contentScale = ContentScale.FillWidth,
-                                        contentDescription = ""
-                                    )
+            HorizontalPager(
+                state = pagerState, modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) { page ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+                ) {
+                    when (page) {
+                        PostTabs.Challenge.ordinal -> {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                PostHeader(post = post)
+                                Spacer(modifier = Modifier.height(20.dp))
+                                Markdown(lines = challenge)
 
-                                    Text(
-                                        text = postDetails.title ?: "",
-                                        fontSize = 20.sp,
-                                        fontWeight = FontWeight.SemiBold,
-                                        modifier = Modifier.padding(top = 20.dp, bottom = 20.dp)
-                                    )
-
-                                    Markdown(lines = challenge)
-
-                                }
                             }
+                        }
 
-                            PostTabs.Solution.ordinal -> {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .verticalScroll(rememberScrollState())
-                                ) {
-                                    Markdown(lines = solution)
+                        PostTabs.Solution.ordinal -> {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                Markdown(lines = solution)
 
-                                    Spacer(modifier = Modifier.height(20.dp))
+                                Spacer(modifier = Modifier.height(20.dp))
 
-                                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Button(
-                                            colors = AppColors.defaultButtonColors,
-                                            onClick = {
-                                                onLaunchDiscussion(postDetails.discussionUrl ?: "")
-                                            }) {
-                                            Icon(Icons.Outlined.Chat, contentDescription = null)
-                                            Text("Discussion", modifier = Modifier.padding(start = 10.dp), fontSize = 18.sp, color = MaterialColors.white)
-                                        }
+                                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Button(
+                                        colors = AppColors.defaultButtonColors,
+                                        onClick = {
+                                            onLaunchDiscussion(postDetails.discussionUrl )
+                                        }) {
+                                        Icon(Icons.Outlined.Chat, contentDescription = null)
+                                        Text("Discussion", modifier = Modifier.padding(start = 10.dp), fontSize = 18.sp, color = MaterialColors.white)
                                     }
                                 }
                             }
+                        }
 
-                            PostTabs.Author.ordinal -> {
-                                Column(
+                        PostTabs.Author.ordinal -> {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                AsyncImage(
                                     modifier = Modifier
-                                        .fillMaxSize()
-                                        .verticalScroll(rememberScrollState())
-                                ) {
-                                    AsyncImage(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(bottom = 10.dp),
-                                        model = AUTHOR_PHOTO_PATH + postDetails.author?.photo,
-                                        contentDescription = null,
-                                        contentScale = ContentScale.FillWidth
-                                    )
+                                        .fillMaxWidth()
+                                        .padding(bottom = 10.dp),
+                                    model = AUTHOR_PHOTO_PATH + postDetails.author.photo,
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillWidth
+                                )
+                                Text(
+                                    text = postDetails.author.name ,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    modifier = Modifier.padding(bottom = 20.dp)
+                                )
+                                Text(
+                                    text = postDetails.author.bio ,
+                                    fontSize = 14.sp,
+                                    modifier = Modifier.padding(bottom = 30.dp)
+                                )
+
+                                if (postDetails.author.url1 != null) {
                                     Text(
-                                        text = postDetails.author?.name ?: "",
-                                        fontSize = 20.sp,
-                                        fontWeight = FontWeight.SemiBold,
-                                        modifier = Modifier.padding(bottom = 20.dp)
-                                    )
-                                    Text(
-                                        text = postDetails.author?.bio ?: "",
+                                        text = postDetails.author.url1,
+                                        color = MaterialColors.lightBlue300,
                                         fontSize = 14.sp,
-                                        modifier = Modifier.padding(bottom = 30.dp)
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .padding(bottom = 20.dp)
+                                            .clickable {
+                                                onAuthorLink1Click(postDetails.author.url1)
+                                            }
                                     )
+                                }
 
-                                    if (postDetails.author?.url1 != null) {
-                                        Text(
-                                            text = postDetails.author.url1,
-                                            color = MaterialColors.lightBlue300,
-                                            fontSize = 14.sp,
-                                            textDecoration = TextDecoration.Underline,
-                                            modifier = Modifier
-                                                .padding(bottom = 20.dp)
-                                                .clickable {
-                                                    onAuthorLink1Click(postDetails.author.url1)
-                                                }
-                                        )
-                                    }
-
-                                    if (postDetails.author?.url2 != null) {
-                                        Text(
-                                            text = postDetails.author.url2,
-                                            color = MaterialColors.lightBlue300,
-                                            fontSize = 14.sp,
-                                            textDecoration = TextDecoration.Underline,
-                                            modifier = Modifier
-                                                .padding(bottom = 30.dp)
-                                                .clickable {
-                                                    onAuthorLink2Click(postDetails.author.url2)
-                                                }
-                                        )
-                                    }
+                                if (postDetails.author.url2 != null) {
+                                    Text(
+                                        text = postDetails.author.url2,
+                                        color = MaterialColors.lightBlue300,
+                                        fontSize = 14.sp,
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier
+                                            .padding(bottom = 30.dp)
+                                            .clickable {
+                                                onAuthorLink2Click(postDetails.author.url2)
+                                            }
+                                    )
                                 }
                             }
                         }
                     }
                 }
+            }
 
-                TabRow(selectedTabIndex = selectedTabIndex.value,
-                    indicator = { tabPositions ->
-                        if (selectedTabIndex.value < tabPositions.size) {
-                            TabRowDefaults.Indicator(
-                                modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex.value]),
-                                color = AppColors.bottomTabIndicator
-                            )
-                        }
-                    }) {
-                    PostTabs.entries.forEachIndexed { index, currentTab ->
-                        Tab(selected = selectedTabIndex.value == index,
-                            selectedContentColor = AppColors.bottomTabIconTextSelected,
-                            unselectedContentColor = MaterialTheme.colorScheme.outline,
-                            onClick = {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(currentTab.ordinal)
-                                }
-                            },
-                            text = { Text(text = currentTab.label) },
-                            icon = {
-                                Icon(
-                                    imageVector = if (selectedTabIndex.value == index) currentTab.selectedIcon else currentTab.unselectedIcon,
-                                    contentDescription = currentTab.label
-                                )
-                            }
+            TabRow(selectedTabIndex = selectedTabIndex.value,
+                indicator = { tabPositions ->
+                    if (selectedTabIndex.value < tabPositions.size) {
+                        TabRowDefaults.Indicator(
+                            modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex.value]),
+                            color = AppColors.bottomTabIndicator
                         )
                     }
+                }) {
+                PostTabs.entries.forEachIndexed { index, currentTab ->
+                    Tab(selected = selectedTabIndex.value == index,
+                        selectedContentColor = AppColors.bottomTabIconTextSelected,
+                        unselectedContentColor = MaterialTheme.colorScheme.outline,
+                        onClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(currentTab.ordinal)
+                            }
+                        },
+                        text = { Text(text = currentTab.label) },
+                        icon = {
+                            Icon(
+                                imageVector = if (selectedTabIndex.value == index) currentTab.selectedIcon else currentTab.unselectedIcon,
+                                contentDescription = currentTab.label
+                            )
+                        }
+                    )
                 }
             }
         }

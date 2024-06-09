@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PostViewModel : ViewModel() {
-    val postDetails = mutableStateOf<PostDetails?>(null)
+    val postDetails = mutableStateOf<PostDetails>(PostDetails())
     var getPostData = true
     var challengee = mutableListOf<LineInfo>()
     var solution = mutableListOf<LineInfo>()

@@ -1,15 +1,12 @@
 package io.github.johannrosenberg.insite.ui.screens.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,7 +16,6 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,21 +31,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.rememberAsyncImagePainter
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.R
 import io.github.johannrosenberg.insite.da.Repository
-import io.github.johannrosenberg.insite.da.web.IMAGES_PATH
-import io.github.johannrosenberg.insite.models.Levels
+import io.github.johannrosenberg.insite.models.Post
 import io.github.johannrosenberg.insite.models.QuizPostings
+import io.github.johannrosenberg.insite.ui.components.PostHeader
 import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import io.github.johannrosenberg.insite.ui.screens.ComposableResourceIDs
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals
@@ -57,9 +48,6 @@ import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_FONT_SIZ
 import io.github.johannrosenberg.insite.ui.screens.ScreenGlobals.APPBAR_ICON_SIZE
 import io.github.johannrosenberg.insite.ui.screens.main.MainViewModel
 import io.github.johannrosenberg.insite.ui.theme.AppColors
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelEasyText
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelHardText
-import io.github.johannrosenberg.insite.ui.theme.AppColors.challengeLevelModerateText
 import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 import io.github.johannrosenberg.jetmagic.models.ComposableInstance
 import io.github.johannrosenberg.jetmagic.models.LocalComposableInstance
@@ -83,8 +71,8 @@ fun HomeHandler(composableInstance: ComposableInstance) {
                     vmMain.drawerState.open()
                 }
             },
-            onPostClick = { id ->
-                navman.goto(composableResId = ComposableResourceIDs.POST_SCREEN, p = id)
+            onPostClick = { post ->
+                navman.goto(composableResId = ComposableResourceIDs.POST_SCREEN, p = post)
             },
             onFilterBySubCategoryClick = { categoryId ->
                 Repository.saveSelectedCategoryId(categoryId)
@@ -100,7 +88,7 @@ fun HomeScreen(
     categoryId: String,
     showFilterButton: Boolean,
     onNavMenuButtonClick: () -> Unit,
-    onPostClick: (postId: String) -> Unit,
+    onPostClick: (post: Post) -> Unit,
     onFilterBySubCategoryClick: (categoryId: String) -> Unit
 ) {
     var showFilterMenu by remember { mutableStateOf(false) }
@@ -109,15 +97,15 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(
-                    painter = rememberAsyncImagePainter(
-                        IMAGES_PATH + Repository
-                            .getRootCategoryId(categoryId)
-                            .lowercase() + ".jpg"
-                    ),
-                    contentScale = ContentScale.FillBounds,
-                    alpha = 0.25f
-                )
+            /*                .paint(
+                                painter = rememberAsyncImagePainter(
+                                    IMAGES_PATH + Repository
+                                        .getRootCategoryId(categoryId)
+                                        .lowercase() + ".jpg"
+                                ),
+                                contentScale = ContentScale.FillBounds,
+                                alpha = 0.25f
+                            )*/
         ) {
             TopAppBar(
                 modifier = Modifier
@@ -208,8 +196,6 @@ fun HomeScreen(
             )
 
             LazyColumn {
-                var showFirstDivider = true
-
                 itemsIndexed(quizPostings.posts) { _, post ->
                     var showPost = true
 
@@ -218,45 +204,12 @@ fun HomeScreen(
                     }
 
                     if (showPost) {
-                        if (showFirstDivider) {
-                            HorizontalDivider(color = MaterialColors.teal50)
-                            showFirstDivider = false
-                        }
+                        PostHeader(
+                            post = post,
+                            onPostClick = onPostClick
+                        )
 
-                        Column(modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                onPostClick(post.id)
-                            }
-                            .padding(10.dp)
-                        ) {
-                            Row(modifier = Modifier.padding(bottom = 10.dp)) {
-                                Text(
-                                    text = post.title,
-                                    fontWeight = FontWeight.W300,
-                                    color = when (post.level) {
-                                        Levels.EASY -> challengeLevelEasyText
-                                        Levels.MODERATE -> challengeLevelModerateText
-                                        else -> challengeLevelHardText
-                                    }
-                                )
-                            }
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = post.date, fontSize = 12.sp
-                                )
-                                Text(
-                                    text = Repository.getCategoryNameById(post.category),
-                                    fontSize = 12.sp
-                                )
-                                Text(text = post.author, fontSize = 12.sp)
-                            }
-                        }
-
-                        HorizontalDivider(color = MaterialColors.teal50)
+                        Spacer(modifier = Modifier.height(30.dp))
                     }
                 }
             }

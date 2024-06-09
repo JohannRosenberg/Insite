@@ -100,7 +100,6 @@ class Repository {
         suspend fun getPostDetails(postId: String): PostDetails {
             try {
                 val postDetails = webApi.getPostDetails(POST_PATH + postId + ".json")
-                postDetails.id = postId
                 return postDetails
             } catch(ex: Exception) {
                 return PostDetails()
