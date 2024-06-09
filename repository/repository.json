@@ -173,14 +173,6 @@
   ],
   "posts": [
     {
-      "id": "election-voting-using-a-mobile-app",
-      "title": "Election voting using a mobile app",
-      "date": "2024-06-05",
-      "category": "politics|elections",
-      "author": "Johann Rosenberg",
-      "level": "hard"
-    },
-    {
       "id": "renting-an-apartment-over-a-business",
       "title": "Renting an apartment over a business",
       "date": "2024-06-05",
@@ -195,6 +187,14 @@
       "category": "relationships|family",
       "author": "Johann Rosenberg",
       "level": "moderate"
+    },
+    {
+      "id": "election-voting-using-a-mobile-app",
+      "title": "Election voting using a mobile app",
+      "date": "2024-06-05",
+      "category": "politics|elections",
+      "author": "Johann Rosenberg",
+      "level": "hard"
     },
     {
       "id": "y6stg",
