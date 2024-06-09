@@ -173,20 +173,20 @@
   ],
   "posts": [
     {
-      "id": "renting-an-apartment-over-a-business",
-      "title": "Renting an apartment over a business",
-      "date": "2024-06-05",
-      "category": "home|renting-an-apartment",
-      "author": "Johann Rosenberg",
-      "level": "easy"
-    },
-    {
       "id": "when-to-give-a-child-a-smartphone",
       "title": "When to give a child a smartphone",
       "date": "2024-06-09",
       "category": "relationships|family",
       "author": "Johann Rosenberg",
       "level": "moderate"
+    },
+    {
+      "id": "renting-an-apartment-over-a-business",
+      "title": "Renting an apartment over a business",
+      "date": "2024-06-05",
+      "category": "home|renting-an-apartment",
+      "author": "Johann Rosenberg",
+      "level": "easy"
     },
     {
       "id": "election-voting-using-a-mobile-app",
