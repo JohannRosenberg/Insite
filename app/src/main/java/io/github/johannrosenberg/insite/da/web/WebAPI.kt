@@ -10,6 +10,7 @@ const val NAV_MENU_ICON_PATH = API_BASE_ADDRESS + "NavMenuIcons/"
 const val IMAGES_PATH = API_BASE_ADDRESS + "images/"
 const val POST_PATH = API_BASE_ADDRESS + "Posts/"
 const val AUTHOR_PHOTO_PATH = API_BASE_ADDRESS + "author-photos/"
+const val REPOSITORY_FILE = API_BASE_ADDRESS + "repository.json"
 
 /**
  * Retrofit API declarations.
@@ -20,8 +21,8 @@ interface WebAPI {
     /**
      * Retrieves all the quiz postings including the meta data such as the categories.
      */
-    @GET("repository.json")
-    suspend fun getQuizPostings(): QuizPostings
+    @GET
+    suspend fun getQuizPostings(@Url url: String): QuizPostings
 
     @GET
     suspend fun getPostDetails(@Url url: String): PostDetails

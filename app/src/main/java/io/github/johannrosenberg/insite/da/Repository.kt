@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
 import io.github.johannrosenberg.insite.App
 import io.github.johannrosenberg.insite.da.web.POST_PATH
+import io.github.johannrosenberg.insite.da.web.REPOSITORY_FILE
 import io.github.johannrosenberg.insite.da.web.RetrofitClient
 import io.github.johannrosenberg.insite.da.web.WebAPI
 import io.github.johannrosenberg.insite.models.AppData
@@ -46,7 +47,7 @@ class Repository {
 
         fun loadAppData(onLoaded: () -> Unit) {
             CoroutineScope(Dispatchers.IO).launch {
-                postings = webApi.getQuizPostings()
+                postings = webApi.getQuizPostings(REPOSITORY_FILE + "?q=" + (0..1_000_000).random())
 
                 // Store the categories in a separate map. This allows for
                 // a fast lookup instead of having to search through nested
