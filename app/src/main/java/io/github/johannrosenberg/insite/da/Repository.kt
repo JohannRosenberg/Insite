@@ -11,6 +11,7 @@ import io.github.johannrosenberg.insite.models.AppData
 import io.github.johannrosenberg.insite.models.Category
 import io.github.johannrosenberg.insite.models.PostDetails
 import io.github.johannrosenberg.insite.models.QuizPostings
+import io.github.johannrosenberg.insite.ui.nav.NavMenuConstants.NAV_MENU_ID_SHOW_ALL_POSTS
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -29,7 +30,7 @@ class Repository {
         var quizPostings = mutableStateOf(postings)
         val categories = mutableMapOf<String, String>()
         val selectedNavMenuId = mutableStateOf(appData.selectedNavMenuId)
-        val selectedCategoryId = mutableStateOf("")
+        val selectedCategoryId = mutableStateOf(NAV_MENU_ID_SHOW_ALL_POSTS)
         val showSplashScreen = mutableStateOf(true)
 
         private const val KEY_APP_DATA = "appData"
