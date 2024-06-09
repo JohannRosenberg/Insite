@@ -107,6 +107,10 @@
           "name": "Dating"
         },
         {
+          "id": "relationships|family",
+          "name": "Family"
+        },
+        {
           "id": "relationships|friends",
           "name": "Friends"
         },
@@ -169,7 +173,7 @@
   ],
   "posts": [
     {
-      "id": "rkmsfy",
+      "id": "election-voting-using-a-mobile-app",
       "title": "Election voting using a mobile app",
       "date": "2024-06-05",
       "category": "politics|elections",
@@ -177,7 +181,7 @@
       "level": "hard"
     },
     {
-      "id": "k4te",
+      "id": "renting-an-apartment-over-a-business",
       "title": "Renting an apartment over a business",
       "date": "2024-06-05",
       "category": "home|renting-an-apartment",
@@ -185,11 +189,11 @@
       "level": "easy"
     },
     {
-      "id": "qx7lwr",
-      "title": "Engine Overheating",
-      "date": "2024-11-02",
-      "category": "automotive|ev-problem",
-      "author": "Blu3Sky",
+      "id": "when-to-give-a-child-a-smartphone",
+      "title": "When to give a child a smartphone",
+      "date": "2024-06-09",
+      "category": "relationships|family",
+      "author": "Johann Rosenberg",
       "level": "moderate"
     },
     {
