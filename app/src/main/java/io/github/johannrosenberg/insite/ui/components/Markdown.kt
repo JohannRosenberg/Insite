@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.johannrosenberg.insite.da.LineInfo
 import io.github.johannrosenberg.insite.da.LineType
+import io.github.johannrosenberg.insite.ui.theme.MaterialColors
 
 @Composable
 fun Markdown(
@@ -30,7 +31,9 @@ fun Markdown(
                         LineType.H4 -> 18.sp
                         LineType.H5 -> 16.sp
                         else -> 14.sp
-                    }, fontWeight = FontWeight.Bold
+                    }, fontWeight = FontWeight.SemiBold,
+                    color = MaterialColors.cyan200,
+                    modifier = Modifier.padding(top = 10.dp)
                 )
             }
 
