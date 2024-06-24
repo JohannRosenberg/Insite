@@ -71,6 +71,10 @@
         {
           "id": "health|first-aid",
           "name": "First Aid"
+        },
+        {
+          "id": "health|first-medicine",
+          "name": "Medicine"
         }
       ]
     },
@@ -89,6 +93,16 @@
         {
           "id": "home|renting-an-apartment",
           "name": "Renting an Apartment"
+        }
+      ]
+    },
+    {
+      "id": "military",
+      "name": "military",
+      "categories": [
+        {
+          "id": "military|decisions",
+          "name": "Military Decisions"
         }
       ]
     },
@@ -176,6 +190,14 @@
     }
   ],
   "posts": [
+    {
+      "id": "deciding-the-fate-of-the-world",
+      "title": "Deciding the fate of the world",
+      "date": "2024-06-24",
+      "category": "military|decisions",
+      "author": "Johann Rosenberg",
+      "level": "moderate"
+    },
     {
       "id": "taking-a-vaccine-developed-with-new-technology",
       "title": "Taking a vaccine developed with new technology",
