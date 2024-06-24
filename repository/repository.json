@@ -80,7 +80,7 @@
     },
     {
       "id": "home",
-      "name": "home",
+      "name": "Home",
       "categories": [
         {
           "id": "home|buying-a-house",
@@ -187,16 +187,34 @@
           "name": "International"
         }
       ]
+    },
+    {
+      "id": "workplace",
+      "name": "Workplace",
+      "categories": [
+        {
+          "id": "workplace|environment",
+          "name": "Environment"
+        }
+      ]
     }
   ],
   "posts": [
+    {
+      "id": "working-remotely",
+      "title": "Working remotely",
+      "date": "2024-06-24",
+      "category": "workplace|environment",
+      "author": "Johann Rosenberg",
+      "level": "hard"
+    },
     {
       "id": "deciding-the-fate-of-the-world",
       "title": "Deciding the fate of the world",
       "date": "2024-06-24",
       "category": "military|decisions",
       "author": "Johann Rosenberg",
-      "level": "moderate"
+      "level": "hard"
     },
     {
       "id": "taking-a-vaccine-developed-with-new-technology",
