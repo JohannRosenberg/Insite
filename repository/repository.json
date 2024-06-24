@@ -201,6 +201,14 @@
   ],
   "posts": [
     {
+      "id": "fake-it-till-you-make-it",
+      "title": "Fake it till you make it",
+      "date": "2024-06-24",
+      "category": "business|investing",
+      "author": "Johann Rosenberg",
+      "level": "hard"
+    },
+    {
       "id": "working-remotely",
       "title": "Working remotely",
       "date": "2024-06-24",
