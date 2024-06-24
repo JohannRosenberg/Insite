@@ -23,6 +23,10 @@
           "name": "Advertising"
         },
         {
+          "id": "business|investing",
+          "name": "Investing"
+        },
+        {
           "id": "business|management",
           "name": "Management"
         }
@@ -172,6 +176,14 @@
     }
   ],
   "posts": [
+    {
+      "id": "taking-a-vaccine-developed-with-new-technology",
+      "title": "Taking a vaccine developed with new technology",
+      "date": "2024-06-24",
+      "category": "health|medicine",
+      "author": "Johann Rosenberg",
+      "level": "moderate"
+    },
     {
       "id": "when-to-give-a-child-a-smartphone",
       "title": "When to give a child a smartphone",

@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                         painter = painterResource(id = R.drawable.splash_screen_2560x1440),
                     )
 
+
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
