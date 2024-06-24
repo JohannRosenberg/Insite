@@ -73,7 +73,7 @@
           "name": "First Aid"
         },
         {
-          "id": "health|first-medicine",
+          "id": "health|medicine",
           "name": "Medicine"
         }
       ]
@@ -98,7 +98,7 @@
     },
     {
       "id": "military",
-      "name": "military",
+      "name": "Military",
       "categories": [
         {
           "id": "military|decisions",
