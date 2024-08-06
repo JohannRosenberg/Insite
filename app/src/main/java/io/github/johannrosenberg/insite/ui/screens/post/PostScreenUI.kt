@@ -111,7 +111,12 @@ fun PostHandler(composableInstance: ComposableInstance) {
         fun launchUrlInBrowser(url: String) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(App.context, intent, null)
+
+            try {
+                startActivity(App.context, intent, null)
+            } catch (ex: Exception) {
+
+            }
         }
 
         PostScreen(
